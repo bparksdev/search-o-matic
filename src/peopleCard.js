@@ -52,7 +52,7 @@ const PeopleCard = ({person}) => {
                             {credits.length !== 0
                                 ?   credits.cast.sort((a, b) => parseInt(a.release_date) - parseInt(b.release_date)).filter(credit => credit.title).map((credit, key) => 
                                         <div key={key}>
-                                            <a href={`/movie/${credit.title}`}>{credit.title}</a>
+                                            <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
                                             &nbsp; {credit.release_date ? `(${credit.release_date.substring(0,4)})` : null}
                                             &nbsp; {credit.character !== '' ? ` - ${credit.character}`  : null}
                                         </div>
@@ -79,7 +79,7 @@ const PeopleCard = ({person}) => {
                             ?   credits.crew.filter(credit => credit.department).sort((a, b) => a.id - b.id).map((credit, key) => 
                                     <li key={key}>
                                         {credit.title 
-                                            ? <a href={`/movie/${credit.title}`}>{credit.title}</a>
+                                            ? <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
                                             : <a href={`/show/${credit.name}`}>{credit.name}</a>
                                         }
                                         &nbsp; {credit.department !== '' ? ` - ${credit.department}`  : null}
