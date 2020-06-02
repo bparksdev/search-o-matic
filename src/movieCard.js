@@ -48,12 +48,11 @@ export default function MovieCard({movie}) {
     }    
       
     return (
-        
         <div className="card" style={style}>
             <table>
                 <tbody>
                 <tr>
-                    <td width="20%" valign="top">
+                    <td width="20%" valign="top" className="poster">
                         {details.status === 'Released' && movie.poster_path
                             ?
                                 <img className="card--image"

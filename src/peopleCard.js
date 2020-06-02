@@ -32,8 +32,7 @@ const PeopleCard = ({person}) => {
                 <div className="col-sm-3">
                     <img 
                         src={details.profile_path ? imageRoot + details.profile_path : nopic}
-                        alt={details.name}
-                        style={{width:"100%"}}
+                        alt={details.name} className="headshot"
                     />
                 </div>
                 <div className="col-sm-8">

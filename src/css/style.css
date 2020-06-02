@@ -67,23 +67,7 @@ small {
     background-color: rgba(0,0,0,0.85);
 }
 
-@media (min-width:786px){
-    .form {
-        grid-template-columns: auto 1fr auto;
-        grid-gap: 1rem;
-        align-items: center;
-    }
-    
-    .input {
-        margin-bottom: 0;
-    }
-}
 
-@media (max-width:1000px) {
-    small {
-        font-size: .9rem;
-    }
-}
 
 .card-list {
     margin-top: 4rem;
@@ -258,4 +242,43 @@ nav {
     padding-bottom: 6px;
     background-color: whitesmoke;   
     font-size: 1.25rem 
+}
+
+
+@media (min-width:786px){
+    .form {
+        grid-template-columns: auto 1fr auto;
+        grid-gap: 1rem;
+        align-items: center;
+    }
+    
+    .input {
+        margin-bottom: 0;
+    }
+}
+
+@media (max-width:1000px) {
+    small {
+        font-size: .9rem;
+    }
+}
+
+
+@media only screen and (max-width: 600px) {
+    .container {
+        max-width: 100%;
+        padding: 0;
+    }
+    .card {
+        padding: 5px;
+    }
+    .poster {
+        display: none;
+    }
+    .headshot {
+        width:33%;
+    }
+    .title {
+        font-size: 2.7rem;
+    }    
 }

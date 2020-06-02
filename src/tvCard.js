@@ -88,7 +88,7 @@ export default function TvCard({show}) {
             <table>
                 <tbody>
                 <tr>
-                    <td width="20%" valign="top">
+                    <td width="20%" valign="top" className="poster">
                         {show.poster_path
                             ?
                                 <img className="card--image"
