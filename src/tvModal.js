@@ -37,7 +37,7 @@ const TvModal = ({details, similars, seasons}) => {
             <Modal.Header closeButton>
                 <Modal.Title><h2>{details.name} - More Info</h2></Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{backgroundColor:"#09243e"}}>
                 <div className="row">
                     <div className="col-sm-2">
                         <img 

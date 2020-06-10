@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Modal from 'react-bootstrap/Modal'
 import { Button } from 'react-bootstrap';
 
-const MovieModal = ({details, similars}) => {
+const MovieModal = ({details, similars, recommendations}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -13,7 +13,7 @@ const MovieModal = ({details, similars}) => {
         currency: 'USD'
       }).format(value)
 
-    const revBackgroundColor = details.revenue >= details.budget ? "lightgreen" : "#ff3b00"  
+    const revBackgroundColor = details.revenue >= details.budget ? "lightgreen" : "#ff9473"  
 
     return (
     <>
@@ -32,12 +32,12 @@ const MovieModal = ({details, similars}) => {
             <Modal.Header closeButton>
                 <Modal.Title><h2>{details.title} - More Info</h2></Modal.Title>
             </Modal.Header>
-            <Modal.Body>
+            <Modal.Body style={{backgroundColor:"#09243e"}}>
                 <div className="row">
                     <div className="col-sm-2">
                         <img 
                             src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${details.poster_path}`} 
-                            style={{width:"100%"}}
+                            style={{width:"100%",borderRadius:"5px"}}
                             alt="Movie poster"
                         />
                     </div>
@@ -57,27 +57,47 @@ const MovieModal = ({details, similars}) => {
                         </div>
                         <div className="row">
                             <div className="col-sm-11 detailItems" style={{backgroundColor:`${revBackgroundColor}`}}>
-                                <h4 style={{display:"inline"}}>Budget</h4>
-                                <p>{details.budget !== 0 ? numberFormat(details.budget) : "Unknown"}</p>
-
-                                <h4 style={{display:"inline"}}>Revenue</h4>
-                                <p>{details.revenue !== 0 ? numberFormat(details.revenue) : "Unknown"}</p>
+                                <span style={{float:"left"}}>
+                                    <h4 style={{display:"inline"}}>Budget: </h4>
+                                    {details.budget !== 0 ? numberFormat(details.budget) : "Unknown"}
+                                </span>
+                                <span style={{float:"right"}}>
+                                    <h4 style={{display:"inline"}}>Revenue: </h4>
+                                    {details.revenue !== 0 ? numberFormat(details.revenue) : "Unknown"}
+                                </span>    
                             </div>
                         </div>
 
                         <div className="row">
                             <div className="col-sm-11 detailItems" style={{textAlign:"left"}}>
-                                <h4>Similar Movies</h4>
-                                <ul>
-                                {similars.results !== undefined
-                                    ? similars.results.map(movie => (
-                                        <li key={movie.id}> 
-                                            <a href={`/movie/${movie.title}/${movie.id}`}>{movie.title}</a>
-                                        </li>                                        
-                                      )) 
-                                    : "None"
-                                }
-                                </ul>                                
+                                <div className="row">
+                                    <div className="col-sm-6">
+                                        <h4>Similar Movies</h4>
+                                        <ul>
+                                        {similars.results !== undefined
+                                            ? similars.results.map(movie => (
+                                                <li key={movie.id}> 
+                                                    <a href={`/movie/${movie.title}/${movie.id}`}>{movie.title}</a>
+                                                </li>                                        
+                                            )) 
+                                            : "None"
+                                        }
+                                        </ul>
+                                    </div>
+                                    <div className="col-sm-6">
+                                        <h4>Recommended Movies</h4>
+                                        <ul>
+                                        {recommendations.results !== undefined
+                                            ? recommendations.results.map(movie => (
+                                                <li key={movie.id}> 
+                                                    <a href={`/movie/${movie.title}/${movie.id}`}>{movie.title}</a>
+                                                </li>                                        
+                                            )) 
+                                            : "None"
+                                        }
+                                        </ul>
+                                    </div>                                          
+                                </div>                              
                             </div>
                         </div>
                     </div>

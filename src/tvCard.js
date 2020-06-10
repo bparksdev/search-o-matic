@@ -77,12 +77,12 @@ export default function TvCard({show}) {
         details.genres.map(genre => genre.name) 
     }
     const style = {  
-        backgroundImage: `url("https://image.tmdb.org/t/p/w185_and_h278_bestv2/${details.backdrop_path}")`,
-        backgroundPosition: 'center',
+        backgroundImage: `url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${details.backdrop_path}")`,
+        backgroundPosition: 'right top',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
     }    
-      
+      //url('https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg')
     return (
          <div className="card" style={style}>
             <table>

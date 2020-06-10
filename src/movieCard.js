@@ -9,13 +9,15 @@ export default function MovieCard({movie}) {
     const [cast, setCast] = useState([])
     const [crew, setCrew] = useState([])
     const [similars, setSimilars] = useState([])
+    const [recommendations, setRecommendations] = useState([])
 
     const dispDate = movie.release_date !== "" ? new Date(movie.release_date) : null
 
     useEffect(() => {
         getDetails()    
         getCast()
-        getSimilars()    
+        getSimilars()
+        getRecommendations()    
     }, [])      
 
     const getDetails = async () => {
@@ -40,8 +42,15 @@ export default function MovieCard({movie}) {
         setSimilars(data)
     }    
 
+    const getRecommendations = async () => {
+        const url = `https://api.themoviedb.org/3/movie/${movie.id}/recommendations?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const res = await fetch(url);
+        const data  = await res.json(); 
+        setRecommendations(data)
+    } 
+
     const style = {  
-        backgroundImage: `url("https://image.tmdb.org/t/p/w185_and_h278_bestv2/${details.backdrop_path}")`,
+        backgroundImage: `url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${details.backdrop_path}")`,
         backgroundPosition: 'center',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
@@ -115,7 +124,7 @@ export default function MovieCard({movie}) {
                             <ActorInfo cast={cast} />
                             
                             <p className="card--desc" style={{marginTop:"20px"}}>{movie.overview}</p>
-                            <MovieModal details={details} similars={similars} />
+                            <MovieModal details={details} similars={similars} recommendations={recommendations} />
                         </div>
                     </td>
                 </tr>

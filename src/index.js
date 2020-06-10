@@ -27,7 +27,10 @@ class Main extends React.Component {
     return (
         <Router> 
         <div className="container">
-            <NavBar/>
+          <span style={{fontSize:"1rem",paddingRight:"5px",color:"white"}}>
+              Powered By <a href="https://developers.themoviedb.org/3/getting-started/introduction" target="_blank">The Movie Database API</a>
+          </span>
+          <NavBar/>
             <div>
                 <Switch>
                     <Route path = "/show/:query" component={TvDisplay} />

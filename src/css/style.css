@@ -12,6 +12,8 @@ body {
     padding: 0;
     background-color: rgb(244,244,244);
     color: #333;
+    background-image: url('../assets/images/moviebg.jpg');
+    
 }
 
 p {
@@ -20,6 +22,7 @@ p {
 
 small {
     font-size: 1.2rem;
+    color: black;
 }
 
 .container {
@@ -30,7 +33,8 @@ small {
 
 .title {
     font-size: 4.4rem;
-    text-align: center
+    text-align: center;
+    color: #ddd;
 }
 
 .form {
@@ -41,6 +45,7 @@ small {
     font-size: 1.2rem;
     margin-bottom: 0.2rem;
     text-transform: uppercase;
+    color: #ddd;
 }
 
 .input {
@@ -67,6 +72,13 @@ small {
     background-color: rgba(0,0,0,0.85);
 }
 
+h2, h3, h4 {
+    color: black;
+}
+
+h4 {
+    font-weight: 600;
+}
 
 
 .card-list {
@@ -88,6 +100,8 @@ small {
 
 .card--image {
     margin-right:20px;
+    width: 90%;
+    border-radius: 10px;    
     /*margin: 0 auto;
     display: block*/
 }
@@ -124,7 +138,7 @@ nav {
     font-size: 2rem;
     top: 0;
     width: 100%;
-    background: white;
+    background:#829eb5;
     margin-bottom: 20px;
   }
   
@@ -142,17 +156,15 @@ nav {
   
   nav a {
     text-decoration: none;
-    color: black;
+    color: rgb(10, 24, 68);
     font-weight: bold;
     padding: 16px 32px;
   }
   
   nav a:hover, .currentnav {
-    background: black;
+    background: rgb(10, 24, 68);
     color: white;
   }
-
-
 
   .bio {
     font-family: Helvetica;
@@ -192,6 +204,14 @@ nav {
   .actor-blurb {
     max-height: 300px;
     overflow-y: auto;
+  }
+
+  .actor-blurb li a {
+      color: #ddd;
+  }
+
+  .actor-blurb h4 {
+    color: #ddd;
   }
 
   .loader:empty {
