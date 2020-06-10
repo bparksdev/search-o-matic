@@ -104,7 +104,7 @@ export default function TvCard({show}) {
                                 {show.name} ({dispDate.getFullYear()})
                                 <span style={{float:"right"}}>
                                     <a href={`https://www.imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank">
-                                        <img src={imdbLogo} alt="IMDb" title="Go to IMDb" />
+                                        <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" />
                                     </a>
                                     {externalIds.facebook_id !== null
                                         ?   <a href={`http://facebook.com/${externalIds.facebook_id}`} rel="noopener noreferrer" target="_blank">

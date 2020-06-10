@@ -69,43 +69,45 @@ export default function MovieCard({movie}) {
                                 {movie.title} {dispDate !== null ? `(${dispDate.getFullYear()})` : null}
                                 <span style={{float:"right"}}>
                                     <a href={`https://www.imdb.com/title/${details.imdb_id}`} rel="noopener noreferrer" target="_blank">
-                                        <img src={imdbLogo} alt="IMDb" title="Go to IMDb" />
+                                        <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" />
                                     </a>
                                 </span>
                             </h3>
                             <div className="row">
                                 <div className="col-sm-2">
-                                    <small>RELEASE DATE:<br />{movie.release_date ? movie.release_date : "In Production"}</small>
+                                    <small>RELEASE DATE:<div>{movie.release_date ? movie.release_date : "In Production"}</div></small>
                                 </div>
                                 <div className="col-sm-2">
                                     <small>
-                                        GENRE(S):<br />
-                                        {isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
+                                        GENRE(S):<div>
+                                        {isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}</div>
                                     </small>
                                 </div>
                                 <div className="col-sm-2">
                                     <small>
-                                    DIRECTOR:<br />{crew.filter(person => person.job === 'Director').map(person => (
+                                    DIRECTOR:<div>{crew.filter(person => person.job === 'Director').map(person => (
                                        <li key={person.id}><a href={`/people/${person.name}`}>{person.name}</a></li>
                                     ))}
+                                    </div>
                                     </small>
                                 </div>
                                 <div className="col-sm-2">
                                     <small>
-                                    SCREENPLAY:<br />
+                                    SCREENPLAY:<div>
                                     {crew.filter(person => person.job === 'Screenplay').map(person => (
                                        <li key={person.id}><a href={`/people/${person.name}`}>{person.name}</a></li>
                                     ))}
+                                    </div>
                                     </small>
                                 </div>                                
                                 <div className="col-sm-2">
                                     <small>
-                                    RUNTIME:<br />{details.runtime ? `${details.runtime} mins` : "TBD"} 
+                                    RUNTIME:<div>{details.runtime ? `${details.runtime} mins` : "TBD"}</div>
                                     </small>
                                 </div>                                
                                 <div className="col-sm-2">
                                     <small>
-                                        RATING:<br />{movie.vote_average ? `${movie.vote_average} out of 10` : "TBD"}
+                                        RATING:<div>{movie.vote_average ? `${movie.vote_average} out of 10` : "TBD"}</div>
                                     </small>
                                 </div>
                             </div>

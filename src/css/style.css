@@ -147,10 +147,12 @@ nav {
     padding: 16px 32px;
   }
   
-  nav a:hover {
+  nav a:hover, .currentnav {
     background: black;
     color: white;
   }
+
+
 
   .bio {
     font-family: Helvetica;
@@ -261,9 +263,42 @@ nav {
     small {
         font-size: .9rem;
     }
+    .card {
+        padding: 0;
+    }
+    .card--image {
+        margin-right: 1px;
+        width: 100px;
+    }
+    .card--title {
+        margin-bottom: 0.5rem;
+        font-size: 2.5rem;
+    }
+    .imdb-logo {
+        width: 60%;
+        float: right;
+    }
+    .card--content {
+        border-radius: 5px;
+        padding: 1rem 1rem;
+    }
+    .card--content>.row>.col-sm-2 {
+        flex: none;
+        max-width:100%;
+    }
+    small div {
+        display: inline-block;
+    }         
+    div small li {
+        margin-right: 3px;
+        display: inline !important;
+    }
+    .row {
+        display: inherit;
+    }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 768px) {
     .container {
         max-width: 100%;
         padding: 0;
