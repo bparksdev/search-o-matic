@@ -29,9 +29,9 @@ const SearchMovies = () => {
                     />
                 <button className="button" type="submit">Search</button>
             </form>
-            <hr />
+
             {query.length > 0 
-                ? <a href={`/show/${query}`}>Search in TV</a>
+                ? <div id="tvsearch"><a href={`/show/${query}`}>Search in TV</a></div>
                 : null
             }
             <div className="card-list">

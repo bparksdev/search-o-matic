@@ -30,7 +30,7 @@ const SearchTV = () => {
                 />
                 <button className="button" type="submit">Search</button>
             </form>
-            <hr />
+
             <div className="card-list">
                 {shows.filter(show => show.poster_path).map(show => (
                     <TvCard show={show} key={show.id} />
