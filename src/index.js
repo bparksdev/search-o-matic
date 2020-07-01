@@ -29,7 +29,8 @@ class Main extends React.Component {
         <Router> 
         <div className="container">
           <span id="poweredby" style={{fontSize:"1rem",paddingRight:"5px",color:"white"}}>
-              Powered By <a href="https://developers.themoviedb.org/3/getting-started/introduction" target="_blank">The Movie Database API</a>
+              Powered By 
+              <a href="https://developers.themoviedb.org/3/getting-started/introduction" rel="noopener noreferrer" target="_blank">The Movie Database API</a>
           </span>
           <NavBar/>
             <div>
@@ -48,6 +49,6 @@ class Main extends React.Component {
   }
 }
 function demoAsyncCall() {
-    return new Promise((resolve) => setTimeout(() => resolve(), 2500));
+    return new Promise((resolve) => setTimeout(() => resolve(), 1000));
   }
 ReactDOM.render(<Main />, document.getElementById('root'));

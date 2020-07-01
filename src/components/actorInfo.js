@@ -125,6 +125,7 @@ export default function ActorInfo({cast}) {
                             href={`https://www.imdb.com/name/${bio.imdb_id}/`}
                             style={{marginTop:"20px",display:"block"}}
                             target="_blank"
+                            rel="noopener noreferrer"
                         >
                             {bio.name}'s IMDb Profile
                         </a>
