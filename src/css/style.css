@@ -88,7 +88,7 @@ h4 {
 
 .card {
     padding: 2rem 4rem;
-    border-radius: 10px;
+    /*border-radius: 10px;*/
     box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
     margin-bottom: 2rem;
     background-color: white;
@@ -237,7 +237,7 @@ nav {
   }
 
   .actors {
-    margin-top:15px;
+    margin-top:1px;
     border:1px solid #85a5de;
     background-color:whitesmoke;
     padding: 10px;
@@ -355,12 +355,18 @@ nav {
     .headshot {
         width:33%;
     }
+    .bio .row .col-sm-3 {
+        text-align: center;
+    }
     .title {
         font-size: 2.7rem;
     } 
     .card--content {
         padding: 1rem 2rem;
-    }     
+    }   
+    .actor-blurb h3 {
+        text-align: center;
+    }  
     .col-sm-2 {
         width: auto;
     } 
@@ -368,4 +374,10 @@ nav {
         margin-bottom: 0.5rem;
         font-size: 2.2rem;
     }     
+    .castlist {
+        font-size: 1.2rem;
+    }
+    nav a {
+        padding: 8px 16px;
+    }    
 }

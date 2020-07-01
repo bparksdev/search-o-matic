@@ -10,8 +10,8 @@ const TvModal = ({details, similars, seasons}) => {
     var seasonInfo = null
 
     try {
-        seasonInfo = seasons.map(season => (
-        <h5>
+        seasonInfo = seasons.map((season,key) => (
+        <h5 key={key}>
             Season {season.season_number}
             <ol>
                 {season.episodes.map((episode,key) => 

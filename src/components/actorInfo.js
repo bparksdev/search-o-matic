@@ -26,12 +26,13 @@ export default function ActorInfo({cast}) {
 
     function jump(h) {
         var top = document.getElementById(h).offsetTop; //Getting Y of target element
-        window.scrollTo(0, top);         
+        window.scroll({top: top, behavior: 'smooth'});         
     }
 
     return (
+        <>
+        <h3 style={{padding:"5px",marginTop:"15px",backgroundColor:"#6d8eaa"}}>Featured Cast</h3>
         <div className="actors">
-        <h3 style={{padding:"5px",backgroundColor:"#6d8eaa"}}>Featured Cast</h3>
         <table className="table">
             <tbody>
             
@@ -90,14 +91,14 @@ export default function ActorInfo({cast}) {
                         setBioClassName('bioClosed')
                         }
                     }>
-                    <div className="row">    
+                    <div className="row" style={{marginRight:"-6px"}}>    
                         <div className="col-sm-3">
                             {bio.profile_path
                                 ? <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${bio.profile_path}`} className="headshot" alt={bio.name} />
                                 : null
                             }
                         </div>
-                        <div className="col-sm-8 offset-sm-1 actor-blurb">
+                        <div className="col-sm-9 actor-blurb">
                             <h3 style={{color:"white"}}>{bio.name}</h3>
                             {bio.biography}
                             <hr />
@@ -135,7 +136,8 @@ export default function ActorInfo({cast}) {
             </tr>  
             </tbody>                             
         </table>                            
-    </div>        
+    </div>
+    </>        
     )
 }
 
