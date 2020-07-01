@@ -77,7 +77,7 @@ export default function MovieCard({movie}) {
                             <h3 className="card--title">
                                 {movie.title} {dispDate !== null ? `(${dispDate.getFullYear()})` : null}
                                 <span style={{float:"right"}}>
-                                    <a href={`https://www.imdb.com/title/${details.imdb_id}`} rel="noopener noreferrer" target="_blank">
+                                    <a href={`https://imdb.com/title/${details.imdb_id}`} rel="noopener noreferrer" target="_blank">
                                         <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" />
                                     </a>
                                 </span>

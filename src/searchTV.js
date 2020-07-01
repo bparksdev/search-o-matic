@@ -14,7 +14,9 @@ const SearchTV = () => {
         try {
             const res = await fetch(url)
             const data  = await res.json()
+            
             setShows(data.results)
+            console.log(data)
         } catch(err) {
             console.error(err);
         }
@@ -32,7 +34,7 @@ const SearchTV = () => {
             </form>
 
             <div className="card-list">
-                {shows.filter(show => show.poster_path).map(show => (
+                {shows.map(show => (
                     <TvCard show={show} key={show.id} />
                 ))}
             </div>    

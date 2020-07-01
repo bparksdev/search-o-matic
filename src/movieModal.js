@@ -57,11 +57,11 @@ const MovieModal = ({details, similars, recommendations}) => {
                         </div>
                         <div className="row">
                             <div className="col-sm-11 detailItems" style={{backgroundColor:`${revBackgroundColor}`}}>
-                                <span style={{float:"left"}}>
+                                <span >
                                     <h4 style={{display:"inline"}}>Budget: </h4>
                                     {details.budget !== 0 ? numberFormat(details.budget) : "Unknown"}
                                 </span>
-                                <span style={{float:"right"}}>
+                                <span style={{marginLeft:"10px"}}>
                                     <h4 style={{display:"inline"}}>Revenue: </h4>
                                     {details.revenue !== 0 ? numberFormat(details.revenue) : "Unknown"}
                                 </span>    
@@ -104,7 +104,7 @@ const MovieModal = ({details, similars, recommendations}) => {
                 </div>
             </Modal.Body>
             <Modal.Footer>
-                <Button variant="secondary" onClick={handleClose}>
+                <Button variant="secondary btn-lg" onClick={handleClose}>
                     Close
                 </Button>
             </Modal.Footer>

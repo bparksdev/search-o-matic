@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
+
 import './css/style.css';
 import NavBar from "./NavBar"
 import MovieDisplay from "./movieDisplay";

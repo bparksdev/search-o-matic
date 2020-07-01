@@ -24,39 +24,58 @@ export default function ActorInfo({cast}) {
         setCredits(data2.cast)        
     }
 
+    function jump(h) {
+        var top = document.getElementById(h).offsetTop; //Getting Y of target element
+        window.scrollTo(0, top);         
+    }
+
     return (
         <div className="actors">
-        <h3>Featured Cast</h3>
-        <table style={{width:"100%",fontSize:"1.2rem"}}>
+        <h3 style={{padding:"5px",backgroundColor:"#6d8eaa"}}>Featured Cast</h3>
+        <table className="table">
             <tbody>
-            <tr>
+            
             {cast.filter(actor => actor.order <= 5).map(actor => (
-                <td width="16%" key={actor.id}>
-                    <img 
-                        src={actor.profile_path ? imageRoot + actor.profile_path : nopic}
-                        alt={actor.name} title="Click for bio"
-                        style={{width:"36px",paddingRight:"2px",pointerEvents: "all"}} 
-                        onClick={() => getActorInfo(actor.id)}
-                    />
-                </td>
+                <tr>
+                    <td 
+                        key={actor.id} 
+                        style={{fontSize:"1.8rem"}}
+                        onClick={() => {
+                            getActorInfo(actor.id)
+                            setTimeout(function() {jump(actor.id)},300)
+                        }}
+
+                    >
+                        <table className="castlist">
+                            <tr>
+                                <td style={{border:"none"}}> 
+                                    <img 
+                                        src={actor.profile_path ? imageRoot + actor.profile_path : nopic}
+                                        alt={actor.name} title="Click for bio"
+                                        style={{width:"60px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"}} 
+                                    />
+                                </td>
+                                <td style={{border:"none"}}> 
+                                    <strong>{actor.name}</strong><br />
+                                    <span>
+                                        <em >{actor.character}</em>
+                                    </span>
+                                </td> 
+                           </tr>  
+                        </table>
+                    </td>
+                </tr>
             ))} 
-            </tr>
+
             <tr>
-            {cast.filter(actor => actor.order <= 5).map(actor => (
-                <td key={actor.id} valign="top">
-                    {actor.name}<br /><em>{actor.character}</em>
-                </td>
-            ))}                                        
-            </tr>
-            <tr>
-                <td colSpan="6" style={{textAlign:"left",paddingLeft:"6px",borderTop:"1px solid #85a5de"}}>
+                <td colSpan="6" style={{textAlign:"left",paddingLeft:"6px"}}>
                     <h4>Other Cast:</h4>
                     <div className="other-cast">
                     {cast.filter(actor => actor.order > 5 ).map(actor => (
                         <span 
                             onClick={() => getActorInfo(actor.id)} 
                             key={actor.id} 
-                            style={{marginRight:"6px",textDecoration:"underline",cursor:"pointer"}}>
+                            style={{marginRight:"6px",textDecoration:"underline",cursor:"pointer",fontSize:"1.3rem"}}>
                             {actor.name}
                         </span>
                     ))} 
@@ -64,7 +83,7 @@ export default function ActorInfo({cast}) {
                 </td>
             </tr>
             <tr>
-                <td colSpan="6" className={bioClassName} 
+                <td colSpan="6" className={bioClassName} id={bio.id}
                     onClick={() => {
                         setBio([])
                         setCredits([])
@@ -79,11 +98,12 @@ export default function ActorInfo({cast}) {
                             }
                         </div>
                         <div className="col-sm-8 offset-sm-1 actor-blurb">
+                            <h3 style={{color:"white"}}>{bio.name}</h3>
                             {bio.biography}
                             <hr />
                             <h4>Acting Credits ({credits.length})</h4>
-                            {[...credits].sort((a, b) => parseInt(a.release_date) - parseInt(b.release_date)).map(credit => 
-                                <li key={credit.id}>
+                            {[...credits].sort((a, b) => parseInt(a.release_date) - parseInt(b.release_date)).map((credit,key) => 
+                                <li key={key}>
                                     {credit.title 
                                         ? <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
                                         : <a href={`/show/${credit.name}`}>{credit.name}</a>
@@ -102,9 +122,10 @@ export default function ActorInfo({cast}) {
                     
                     {bio.biography || credits ?
                         <a 
-                            href={`https://www.imdb.com/name/${bio.imdb_id}`}
+                            href={`https://www.imdb.com/name/${bio.imdb_id}/`}
                             style={{marginTop:"20px",display:"block"}}
-                            rel="noopener noreferrer" target="_blank">
+                            target="_blank"
+                        >
                             {bio.name}'s IMDb Profile
                         </a>
                         : null

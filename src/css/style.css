@@ -13,7 +13,7 @@ body {
     background-color: rgb(244,244,244);
     color: #333;
     background-image: url('../assets/images/moviebg.jpg');
-    
+    background-size: cover;
 }
 
 p {
@@ -55,6 +55,7 @@ small {
     border-radius: 20px;
     border: 1px solid #ddd;
     margin-bottom: 1rem;
+    outline: none;
 }
 
 .button {
@@ -133,13 +134,13 @@ h4 {
 }
 
 nav {
-    border-bottom: 4px solid black;
     text-align: center;
     font-size: 2rem;
     top: 0;
     width: 100%;
     background:#829eb5;
     margin-bottom: 20px;
+    opacity: 0.8;
   }
   
   nav ul {
@@ -238,8 +239,8 @@ nav {
   .actors {
     margin-top:15px;
     border:1px solid #85a5de;
-    text-align:center;
     background-color:whitesmoke;
+    padding: 10px;
     border-radius: 5px;
   }
 

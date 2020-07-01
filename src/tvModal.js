@@ -14,8 +14,8 @@ const TvModal = ({details, similars, seasons}) => {
         <h5>
             Season {season.season_number}
             <ol>
-                {season.episodes.map(episode => 
-                    <li className="episodes" title={episode.air_date + ": " + episode.overview} style={{cursor:"default"}}>{episode.name}</li>
+                {season.episodes.map((episode,key) => 
+                    <li className="episodes" key={key} title={episode.air_date + ": " + episode.overview} style={{cursor:"default"}}>{episode.name}</li>
                 )}
             </ol>
         </h5>))

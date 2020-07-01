@@ -38,8 +38,6 @@ export default function TvCard({show}) {
             allSeasons.push(data)
         }
         setSeasons(allSeasons)
-
-
     }
 
     const getCast = async () => {
@@ -82,7 +80,7 @@ export default function TvCard({show}) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
     }    
-      //url('https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/tsRy63Mu5cu8etL1X7ZLyf7UP1M.jpg')
+
     return (
          <div className="card" style={style}>
             <table>
@@ -103,7 +101,7 @@ export default function TvCard({show}) {
                             <h3 className="card--title">
                                 {show.name} ({dispDate.getFullYear()})
                                 <span style={{float:"right"}}>
-                                    <a href={`https://www.imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank">
+                                    <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank">
                                         <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" />
                                     </a>
                                     {externalIds.facebook_id !== null
