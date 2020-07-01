@@ -26,7 +26,7 @@ export default function ActorInfo({cast}) {
 
     function jump(h) {
         var top = document.getElementById(h).offsetTop; //Getting Y of target element
-        window.scroll({top: top, behavior: 'smooth'});         
+        window.scroll({top: top+200, behavior: 'smooth'});         
     }
 
     return (
