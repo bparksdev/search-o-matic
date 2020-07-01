@@ -121,7 +121,7 @@ export default function ActorInfo({cast}) {
                         </div>
                     </div>
                     
-                    {bio.biography || credits ?
+                    {/*bio.biography || credits ?
                         <a 
                             href={`https://www.imdb.com/name/${bio.imdb_id}/`}
                             style={{marginTop:"20px",display:"block"}}
@@ -131,7 +131,7 @@ export default function ActorInfo({cast}) {
                             {bio.name}'s IMDb Profile
                         </a>
                         : null
-                    }
+                    */}
                 </td>    
             </tr>  
             </tbody>                             
