@@ -26,7 +26,7 @@ const SearchTV = () => {
         <>
             <form className="form" onSubmit={searchTV}>
                 <label className="label" htmlFor="querytv">TV SHOW</label>
-                <input className="input" type="text" name="querytv"
+                <input className="input" type="text" name="querytv"  required="true"
                     placeholder="i.e. Seinfeld"
                     value={querytv} onChange={(e) => setQuerytv(e.target.value)}
                 />

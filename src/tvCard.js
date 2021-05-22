@@ -41,6 +41,7 @@ export default function TvCard({show}) {
     }
 
     const getCast = async () => {
+        console.log(show.id);
         const url = `https://api.themoviedb.org/3/tv/${show.id}/credits?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 

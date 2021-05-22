@@ -48,8 +48,9 @@ export default function ActorInfo({cast}) {
 
                     >
                         <table className="castlist">
+                            <tbody>
                             <tr>
-                                <td style={{border:"none"}}> 
+                                <td key={actor.name} style={{border:"none"}}> 
                                     <img 
                                         src={actor.profile_path ? imageRoot + actor.profile_path : nopic}
                                         alt={actor.name} title="Click for bio"
@@ -59,10 +60,11 @@ export default function ActorInfo({cast}) {
                                 <td style={{border:"none"}}> 
                                     <strong>{actor.name}</strong><br />
                                     <span>
-                                        <em >{actor.character}</em>
+                                        <em>{actor.character}</em>
                                     </span>
                                 </td> 
-                           </tr>  
+                           </tr> 
+                           </tbody> 
                         </table>
                     </td>
                 </tr>
@@ -75,7 +77,7 @@ export default function ActorInfo({cast}) {
                     {cast.filter(actor => actor.order > 5 ).map(actor => (
                         <span 
                             onClick={() => getActorInfo(actor.id)} 
-                            key={actor.id} 
+                            key={actor.order} 
                             style={{marginRight:"6px",textDecoration:"underline",cursor:"pointer",fontSize:"1.3rem"}}>
                             {actor.name}
                         </span>
