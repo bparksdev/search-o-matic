@@ -10,7 +10,6 @@ export default function TvCard({show}) {
     const [similars, setSimilars] = useState([])
     const [externalIds, setExternalIDs] = useState([])
     const [seasons, setSeasons] = useState([])
-    const [providers, setProviders] = useState([])
     const allSeasons = []
  
     useEffect(() => {
@@ -18,7 +17,6 @@ export default function TvCard({show}) {
         getCast()
         getSimilars()
         getExternalIDs()
-        getProviders()  
     }, [])
 
     useEffect(() => {
@@ -64,12 +62,12 @@ export default function TvCard({show}) {
         setExternalIDs(data)       
     }
 
-    const getProviders = async () => {
-        const url = `https://api.themoviedb.org/3/tv/${show.id}/external_ids?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
-        const res = await fetch(url);
-        const data  = await res.json(); 
-        setProviders(data)       
-    }
+    // const getProviders = async () => {
+    //     const url = `https://api.themoviedb.org/3/tv/${show.id}/watch/providers?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+    //     const res = await fetch(url);
+    //     const data  = await res.json(); 
+    //     setProviders(data)       
+    // }
 
     const getSeasons = async () => {
         for(var x=1; x<=details.number_of_seasons; x++) {
@@ -150,15 +148,15 @@ export default function TvCard({show}) {
                                 </div>
                                 <div className="col-sm-2">
                                     <small>
+                                        RATING:<br />{show.vote_average} out of 10
+                                    </small>
+                                </div>
+                                <div className="col-sm-2">
+                                    <small style={{fontWeight:"600"}}>
                                     NETWORK(S):<br />
                                     {isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
                                     </small>
                                 </div>                                
-                                <div className="col-sm-2">
-                                    <small>
-                                        RATING:<br />{show.vote_average} out of 10
-                                    </small>
-                                </div>
                             </div>
 
                             <ActorInfo cast={cast} />
