@@ -10,13 +10,15 @@ export default function TvCard({show}) {
     const [similars, setSimilars] = useState([])
     const [externalIds, setExternalIDs] = useState([])
     const [seasons, setSeasons] = useState([])
+    const [providers, setProviders] = useState([])
     const allSeasons = []
  
     useEffect(() => {
         getDetails()    
         getCast()
         getSimilars()
-        getExternalIDs()  
+        getExternalIDs()
+        getProviders()  
     }, [])
 
     useEffect(() => {
@@ -60,6 +62,13 @@ export default function TvCard({show}) {
         const res = await fetch(url);
         const data  = await res.json(); 
         setExternalIDs(data)       
+    }
+
+    const getProviders = async () => {
+        const url = `https://api.themoviedb.org/3/tv/${show.id}/external_ids?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const res = await fetch(url);
+        const data  = await res.json(); 
+        setProviders(data)       
     }
 
     const getSeasons = async () => {
