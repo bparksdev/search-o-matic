@@ -30,7 +30,7 @@ class Main extends React.Component {
         <div className="container">
           <span id="poweredby" style={{fontSize:"1rem",paddingRight:"5px",color:"white"}}>
               Powered By 
-              <a href="https://developers.themoviedb.org/3/getting-started/introduction" rel="noopener noreferrer" target="_blank">The Movie Database API</a>
+              <a href="https://developers.themoviedb.org/3/getting-started/introduction" rel="noopener noreferrer" target="_blank">The Movie Database API</a> and JustWatch
           </span>
           <NavBar/>
             <div>

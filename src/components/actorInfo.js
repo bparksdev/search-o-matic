@@ -37,7 +37,7 @@ export default function ActorInfo({cast}) {
             <tbody>
             
             {cast.filter(actor => actor.order <= 5).map(actor => (
-                <tr>
+                <tr key={actor.order}>
                     <td 
                         key={actor.id} 
                         style={{fontSize:"1.8rem"}}

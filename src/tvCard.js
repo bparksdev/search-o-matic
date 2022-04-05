@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from "react"
 import TvModal from "./tvModal"
 import ActorInfo from "./components/actorInfo"
-import { isArray } from "util"
+//import { isArray } from "util"
 import imdbLogo from "./assets/images/imdb.png"
 
 export default function TvCard({show}) {
@@ -9,6 +9,7 @@ export default function TvCard({show}) {
     const [cast, setCast] = useState([])
     const [similars, setSimilars] = useState([])
     const [externalIds, setExternalIDs] = useState([])
+    const [providers, setProviders] = useState([])
     const [seasons, setSeasons] = useState([])
     const allSeasons = []
  
@@ -17,6 +18,7 @@ export default function TvCard({show}) {
         getCast()
         getSimilars()
         getExternalIDs()
+        getProviders()
     }, [])
 
     useEffect(() => {
@@ -41,7 +43,7 @@ export default function TvCard({show}) {
     }
 
     const getCast = async () => {
-        console.log(show.id);
+        //console.log(show.id);
         const url = `https://api.themoviedb.org/3/tv/${show.id}/credits?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
@@ -59,15 +61,20 @@ export default function TvCard({show}) {
         const url = `https://api.themoviedb.org/3/tv/${show.id}/external_ids?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
-        setExternalIDs(data)       
+        setExternalIDs(data)
+        //console.log(data);     
     }
 
-    // const getProviders = async () => {
-    //     const url = `https://api.themoviedb.org/3/tv/${show.id}/watch/providers?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
-    //     const res = await fetch(url);
-    //     const data  = await res.json(); 
-    //     setProviders(data)       
-    // }
+    const getProviders = async () => {
+        const url = `https://api.themoviedb.org/3/tv/${show.id}/watch/providers?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const res = await fetch(url);
+        const providers  = await res.json()
+        setProviders(providers)
+        //console.log(!providers.results)
+        if( providers.results.US ) {
+        console.log( providers.results.US )
+        }
+    }
 
     const getSeasons = async () => {
         for(var x=1; x<=details.number_of_seasons; x++) {
@@ -79,7 +86,7 @@ export default function TvCard({show}) {
         setSeasons(allSeasons)
     }
 
-    if(isArray(details.genres)) {
+    if(Array.isArray(details.genres)) {
         details.genres.map(genre => genre.name) 
     }
     const style = {  
@@ -143,7 +150,7 @@ export default function TvCard({show}) {
                                 <div className="col-sm-4">
                                     <small>
                                         GENRE(S):<br />
-                                        {isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
+                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
                                     </small>
                                 </div>
                                 <div className="col-sm-2">
@@ -153,10 +160,38 @@ export default function TvCard({show}) {
                                 </div>
                                 <div className="col-sm-2">
                                     <small style={{fontWeight:"600"}}>
-                                    NETWORK(S):<br />
-                                    {isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
+                                    ORIGINAL NETWORK(S):<br />
+                                    {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
                                     </small>
                                 </div>                                
+                            </div>
+                            <div className="row">
+                                <div className="col-sm-12" style={{padding:"10px", border:"2px solid gray",marginTop:"10px"}}>
+                                    <h4>WATCH OPTIONS</h4>
+                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white"}}>Buy/Rent:</h5>
+                                    {providers.results && providers.results.US && Array.isArray(providers.results.US.buy) 
+                                        ? providers.results.US.buy.map(
+                                            buyoption => (
+                                                <div key={buyoption.provider_id} style={{display:"inline-block",width:"70px",height:"70px",marginRight:"10px"}}>
+                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
+                                                </div>
+                                            )
+                                        ) 
+                                        : "N/A"
+                                    }
+                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white",marginTop:"4px"}}>Streaming:</h5>
+                                    {providers.results && providers.results.US && Array.isArray(providers.results.US.flatrate) 
+                                        ? providers.results.US.flatrate.map(
+                                            rentoption => (
+                                                <div key={rentoption.provider_id} style={{display:"inline-block",width:"70px",height:"70px",marginRight:"10px"}}>
+                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} style={{width:"100%",height:"100%"}} />
+                                                </div>
+                                            )
+                                        ) 
+                                        : "N/A"
+                                    }                                    
+                                   
+                                </div>    
                             </div>
 
                             <ActorInfo cast={cast} />
