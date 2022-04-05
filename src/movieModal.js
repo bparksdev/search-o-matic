@@ -19,7 +19,7 @@ const MovieModal = ({details, similars, recommendations}) => {
     <>
         {similars.total_results !== 0
             ?
-            <Button variant="primary" onClick={handleShow}>
+            <Button variant="primary btn-lg" onClick={handleShow}>
                 More Info
             </Button>
             : null

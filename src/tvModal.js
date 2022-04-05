@@ -25,7 +25,7 @@ const TvModal = ({details, similars, seasons}) => {
 
     return (
     <>
-        <Button variant="primary" onClick={handleShow}>
+        <Button variant="primary btn-lg" onClick={handleShow}>
           More Info
         </Button>
   
@@ -47,6 +47,30 @@ const TvModal = ({details, similars, seasons}) => {
                         />
                     </div>
                     <div className="col-sm-10">
+                        <div className="row">
+                            <div className="col-sm-11 detailItems">
+                            <div>
+                                    <small><strong>AIR DATES:</strong> {details.first_air_date} to {details.last_air_date}</small>
+                                </div>
+                                <div>
+                                    <small>
+                                        <strong>GENRE(S):</strong>
+                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
+                                    </small>
+                                </div>
+                                <div>
+                                    <small>
+                                        <strong>RATING:</strong> {details.vote_average} out of 10
+                                    </small>
+                                </div>
+                                <div>
+                                    <small>
+                                        <strong>ORIGINAL NETWORK(S):</strong>
+                                    {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
                         <div className="row text-center">
                             <div className="col-sm-5 detailItems">
                                 <h4>Seasons</h4>

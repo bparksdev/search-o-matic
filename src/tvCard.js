@@ -145,23 +145,23 @@ export default function TvCard({show}) {
                             <h3 className="card--title">
                                 {show.name} ({dispDate.getFullYear()})
                                 <span style={{float:"right"}}>
-                                    <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank">
+                                    <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                         <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" />
                                     </a>
                                     {externalIds.facebook_id !== null
-                                        ?   <a href={`http://facebook.com/${externalIds.facebook_id}`} rel="noopener noreferrer" target="_blank">
+                                        ?   <a href={`http://facebook.com/${externalIds.facebook_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                                 <i className="ri-facebook-fill" style={{fontSize:"2.2rem"}}></i>
                                             </a>
                                         :   null
                                     }
                                     {externalIds.twitter_id !== null
-                                        ?   <a href={`http://twitter.com/${externalIds.twitter_id}`} rel="noopener noreferrer" target="_blank">
+                                        ?   <a href={`http://twitter.com/${externalIds.twitter_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                                 <i className="ri-twitter-fill" style={{fontSize:"2.2rem"}}></i>
                                             </a>
                                         :   null
                                     }
                                     {externalIds.instagram_id !== null
-                                        ?   <a href={`http://instagram.com/${externalIds.instagram_id}`} rel="noopener noreferrer" target="_blank">
+                                        ?   <a href={`http://instagram.com/${externalIds.instagram_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                                 <i className="ri-instagram-fill" style={{fontSize:"2.2rem"}}></i>
                                             </a>
                                         :   null
@@ -173,12 +173,11 @@ export default function TvCard({show}) {
                             <div className="row">
                                 <div className="col-sm-12" style={{padding:"10px 10px 24px 10px", border:"2px solid gray",marginTop:"10px"}}>
                                     <h4>Watch Options</h4>
-                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white"}}>Buy/Rent:</h5>
+                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white"}}>Buy/Rent</h5>
                                     {providers.results && providers.results.US && Array.isArray(providers.results.US.buy) 
                                         ? providers.results.US.buy.map(
                                             buyoption => (
                                                 <div key={buyoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px"}}>
-                                                    <span style={{height:"30px"}}>{buyoption.provider_name}</span>
                                                     <img className=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} title={buyoption.provider_name} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
                                                     
                                                 </div>
@@ -186,12 +185,11 @@ export default function TvCard({show}) {
                                         ) 
                                         : "N/A"
                                     }
-                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white",marginTop:"20px"}}>Streaming:</h5>
+                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white",marginTop:"20px"}}>Streaming</h5>
                                     {providers.results && providers.results.US && Array.isArray(providers.results.US.flatrate) 
                                         ? providers.results.US.flatrate.map(
                                             rentoption => (
                                                 <div key={rentoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px"}}>
-                                                    <span style={{height:"30px"}}>{rentoption.provider_name}</span>
                                                     <img className=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} title={rentoption.provider_name} style={{width:"100%",height:"100%"}} />
                                                 </div>
                                             )
