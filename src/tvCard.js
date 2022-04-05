@@ -110,6 +110,35 @@ export default function TvCard({show}) {
                                 />
                             : null
                         }
+                        <div className="alert alert-info mt-4" style={{width:"90%"}}>
+                                <div>
+                                    <small><strong>AIR DATES:</strong> {show.first_air_date} to {details.last_air_date}</small>
+                                </div>
+                                <hr />
+                                <div>
+                                    <small><strong>SEASONS:</strong> {details.number_of_seasons}<br />({details.number_of_episodes} episodes)</small>
+                                </div>
+                                <hr />                                
+                                <div>
+                                    <small>
+                                        <strong>GENRE(S):</strong>
+                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
+                                    </small>
+                                </div>
+                                <hr />
+                                <div>
+                                    <small>
+                                        <strong>RATING:</strong> {show.vote_average} out of 10
+                                    </small>
+                                </div>
+                                <hr />
+                                <div>
+                                    <small>
+                                        <strong>ORIGINAL NETWORK(S):</strong>
+                                    {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
+                                    </small>
+                                </div>                                
+                            </div>                    
                     </td>
                     <td>
                         <div className="card--content" key={show.id}>
@@ -140,51 +169,30 @@ export default function TvCard({show}) {
                                     
                                 </span>
                             </h3>
+
                             <div className="row">
-                                <div className="col-sm-2">
-                                    <small>AIR DATES:<br />{show.first_air_date} to {details.last_air_date}</small>
-                                </div>
-                                <div className="col-sm-2">
-                                    <small>SEASONS:<br />{details.number_of_seasons}<br />({details.number_of_episodes} episodes)</small>
-                                </div>                                
-                                <div className="col-sm-4">
-                                    <small>
-                                        GENRE(S):<br />
-                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
-                                    </small>
-                                </div>
-                                <div className="col-sm-2">
-                                    <small>
-                                        RATING:<br />{show.vote_average} out of 10
-                                    </small>
-                                </div>
-                                <div className="col-sm-2">
-                                    <small style={{fontWeight:"600"}}>
-                                    ORIGINAL NETWORK(S):<br />
-                                    {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
-                                    </small>
-                                </div>                                
-                            </div>
-                            <div className="row">
-                                <div className="col-sm-12" style={{padding:"10px", border:"2px solid gray",marginTop:"10px"}}>
-                                    <h4>WATCH OPTIONS</h4>
+                                <div className="col-sm-12" style={{padding:"10px 10px 24px 10px", border:"2px solid gray",marginTop:"10px"}}>
+                                    <h4>Watch Options</h4>
                                     <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white"}}>Buy/Rent:</h5>
                                     {providers.results && providers.results.US && Array.isArray(providers.results.US.buy) 
                                         ? providers.results.US.buy.map(
                                             buyoption => (
-                                                <div key={buyoption.provider_id} style={{display:"inline-block",width:"70px",height:"70px",marginRight:"10px"}}>
-                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
+                                                <div key={buyoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px"}}>
+                                                    <span style={{height:"30px"}}>{buyoption.provider_name}</span>
+                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} title={buyoption.provider_name} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
+                                                    
                                                 </div>
                                             )
                                         ) 
                                         : "N/A"
                                     }
-                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white",marginTop:"4px"}}>Streaming:</h5>
+                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white",marginTop:"20px"}}>Streaming:</h5>
                                     {providers.results && providers.results.US && Array.isArray(providers.results.US.flatrate) 
                                         ? providers.results.US.flatrate.map(
                                             rentoption => (
-                                                <div key={rentoption.provider_id} style={{display:"inline-block",width:"70px",height:"70px",marginRight:"10px"}}>
-                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} style={{width:"100%",height:"100%"}} />
+                                                <div key={rentoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px"}}>
+                                                    <span style={{height:"30px"}}>{rentoption.provider_name}</span>
+                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} title={rentoption.provider_name} style={{width:"100%",height:"100%"}} />
                                                 </div>
                                             )
                                         ) 
