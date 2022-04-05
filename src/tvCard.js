@@ -144,31 +144,38 @@ export default function TvCard({show}) {
                         <div className="card--content" key={show.id}>
                             <h3 className="card--title">
                                 {show.name} ({dispDate.getFullYear()})
-                                <span style={{float:"right"}}>
+                            </h3>
+                            <div className="row">
+                                <div className="col-sm-3">
                                     <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                         <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" />
                                     </a>
+                                </div>
+                                <div className="col-sm-3">
                                     {externalIds.facebook_id !== null
                                         ?   <a href={`http://facebook.com/${externalIds.facebook_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                                 <i className="ri-facebook-fill" style={{fontSize:"2.2rem"}}></i>
                                             </a>
                                         :   null
                                     }
+                                </div>
+                                <div className="col-sm-3">
                                     {externalIds.twitter_id !== null
                                         ?   <a href={`http://twitter.com/${externalIds.twitter_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                                 <i className="ri-twitter-fill" style={{fontSize:"2.2rem"}}></i>
                                             </a>
                                         :   null
                                     }
+                                </div>
+                                <div className="col-sm-3">
                                     {externalIds.instagram_id !== null
                                         ?   <a href={`http://instagram.com/${externalIds.instagram_id}`} rel="noopener noreferrer" target="_blank" style={{marginRight:"10px"}}>
                                                 <i className="ri-instagram-fill" style={{fontSize:"2.2rem"}}></i>
                                             </a>
                                         :   null
                                     }
-                                    
-                                </span>
-                            </h3>
+                                </div>
+                        </div>
 
                             <div className="row">
                                 <div className="col-sm-12" style={{padding:"10px 10px 24px 10px", border:"2px solid gray",marginTop:"10px"}}>
