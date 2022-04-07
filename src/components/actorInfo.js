@@ -26,11 +26,6 @@ export default function ActorInfo({cast}) {
         setCredits(data2.cast)        
     }
 
-    function jump(h) {
-        var top = document.getElementById(h).offsetTop; //Getting Y of target element
-        //window.scroll({top: top+200, behavior: 'smooth'});         
-    }
-
     return (
         <>
         <h3 style={{padding:"5px",marginTop:"15px",backgroundColor:"#6d8eaa"}}>Featured Cast</h3>

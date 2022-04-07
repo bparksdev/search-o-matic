@@ -15,7 +15,7 @@ function TVDisplay() {
         } catch(err) {
             console.error(err);
         }
-    }, [])  
+    }, [url])  
     
     return (
         <div className="card-list">

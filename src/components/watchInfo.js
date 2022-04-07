@@ -3,17 +3,17 @@ import React, {useState, useEffect} from "react";
 export default function WatchInfo({movie}) {
    
     const [providers, setProviders] = useState([])
-    
-    useEffect(() => {
-        getProviders()
-    }, [])    
-
+    // eslint-disable-next-line
     const getProviders = async () => {
         const url = `https://api.themoviedb.org/3/${arguments[0].source}/${movie.id}/watch/providers?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
         const res = await fetch(url);
         const providers  = await res.json()
         setProviders(providers)
     }
+
+    useEffect(() => {
+        getProviders()
+    }, [getProviders]) 
 
     return (
     <div className="row">
@@ -24,7 +24,7 @@ export default function WatchInfo({movie}) {
                 ? providers.results.US.buy.map(
                     buyoption => (
                         <div key={buyoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px",marginBottom:"4px"}}>
-                            <img className=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} title={buyoption.provider_name} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
+                            <img alt=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} title={buyoption.provider_name} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
                             
                         </div>
                     )
@@ -36,7 +36,7 @@ export default function WatchInfo({movie}) {
                 ? providers.results.US.flatrate.map(
                     rentoption => (
                         <div key={rentoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px",marginBottom:"4px"}}>
-                            <img className=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} title={rentoption.provider_name} style={{width:"100%",height:"100%"}} />
+                            <img alt=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} title={rentoption.provider_name} style={{width:"100%",height:"100%"}} />
                         </div>
                     )
                 ) 

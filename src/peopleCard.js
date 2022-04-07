@@ -5,13 +5,6 @@ const PeopleCard = ({person}) => {
     const [details, setDetails] = useState([])
     const [credits, setCredits] = useState([])
 
-    const imageRoot = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2'
-
-    useEffect(() => {
-        getDetails()    
-        getCredits()
-    }, [])      
-    
     const getDetails = async () => {
         const url = `https://api.themoviedb.org/3/person/${person.id}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`;
         const res = await fetch(url);
@@ -25,6 +18,12 @@ const PeopleCard = ({person}) => {
         const data2  = await res2.json(); 
         setCredits(data2)     
     }
+
+    useEffect(() => {
+        getDetails()    
+        getCredits()
+        // eslint-disable-next-line
+    }, []) 
 
     return (
         <div className="card">

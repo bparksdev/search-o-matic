@@ -18,7 +18,7 @@ function MovieDisplay() {
         } catch(err) {
             console.error(err);
         }
-    }, [])  
+    }, [movieId,url])  
     
     return (
         <div className="card-list">

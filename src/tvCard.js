@@ -18,10 +18,12 @@ export default function TvCard({show}) {
         getCast()
         getSimilars()
         getExternalIDs()
+        // eslint-disable-next-line
     }, [])
 
     useEffect(() => {
         getSeasons()
+        // eslint-disable-next-line
     }, [details])    
     
     

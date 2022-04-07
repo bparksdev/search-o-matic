@@ -14,13 +14,6 @@ export default function MovieCard({movie}) {
 
     const dispDate = movie.release_date !== "" ? new Date(movie.release_date) : null
 
-    useEffect(() => {
-        getDetails()    
-        getCast()
-        getSimilars()
-        getRecommendations()
-    }, [])      
-
     const getDetails = async () => {
         const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`;
         const res = await fetch(url);
@@ -56,7 +49,16 @@ export default function MovieCard({movie}) {
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
     }    
-      
+    // eslint-disable-next-line  
+    useEffect(() => {
+        getDetails()
+        getCast()
+        getSimilars()
+        getRecommendations()
+        // eslint-disable-next-line
+    }, [])      
+
+
     return (
         <div className="card" style={style}>
             <table>
