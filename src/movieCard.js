@@ -3,6 +3,7 @@ import MovieModal from "./movieModal"
 import { isArray } from "util"
 import imdbLogo from "./assets/images/imdb.png"
 import ActorInfo from "./components/actorInfo"
+import WatchInfo from "./components/watchInfo"
 
 export default function MovieCard({movie}) {
     const [details, setDetails] = useState([])
@@ -17,7 +18,7 @@ export default function MovieCard({movie}) {
         getDetails()    
         getCast()
         getSimilars()
-        getRecommendations()    
+        getRecommendations()
     }, [])      
 
     const getDetails = async () => {
@@ -120,10 +121,13 @@ export default function MovieCard({movie}) {
                                     </small>
                                 </div>
                             </div>
+                            
+                            <p className="card--desc" style={{marginTop:"20px"}}>{movie.overview}</p>
+
+                            <WatchInfo movie={movie} source="movie" />
 
                             <ActorInfo cast={cast} />
                             
-                            <p className="card--desc" style={{marginTop:"20px"}}>{movie.overview}</p>
                             <MovieModal details={details} similars={similars} recommendations={recommendations} />
                         </div>
                     </td>

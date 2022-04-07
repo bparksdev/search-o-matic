@@ -3,13 +3,13 @@ import TvModal from "./tvModal"
 import ActorInfo from "./components/actorInfo"
 //import { isArray } from "util"
 import imdbLogo from "./assets/images/imdb.png"
+import WatchInfo from "./components/watchInfo"
 
 export default function TvCard({show}) {
     const [details, setDetails] = useState([])
     const [cast, setCast] = useState([])
     const [similars, setSimilars] = useState([])
     const [externalIds, setExternalIDs] = useState([])
-    const [providers, setProviders] = useState([])
     const [seasons, setSeasons] = useState([])
     const allSeasons = []
  
@@ -18,7 +18,6 @@ export default function TvCard({show}) {
         getCast()
         getSimilars()
         getExternalIDs()
-        getProviders()
     }, [])
 
     useEffect(() => {
@@ -65,17 +64,6 @@ export default function TvCard({show}) {
         //console.log(data);     
     }
 
-    const getProviders = async () => {
-        const url = `https://api.themoviedb.org/3/tv/${show.id}/watch/providers?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
-        const res = await fetch(url);
-        const providers  = await res.json()
-        setProviders(providers)
-        //console.log(!providers.results)
-        if( providers.results.US ) {
-        console.log( providers.results.US )
-        }
-    }
-
     const getSeasons = async () => {
         for(var x=1; x<=details.number_of_seasons; x++) {
             const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
@@ -110,7 +98,7 @@ export default function TvCard({show}) {
                                 />
                             : null
                         }
-                        <div className="alert alert-info mt-4" style={{width:"90%"}}>
+                        <div className="alert alert-info mt-4" style={{opacity: "0.8", width:"90%"}}>
                                 <div>
                                     <small><strong>AIR DATES:</strong> {show.first_air_date} to {details.last_air_date}</small>
                                 </div>
@@ -152,66 +140,41 @@ export default function TvCard({show}) {
                                             <img src={imdbLogo} className="" style={{width:"80px"}} alt="IMDb" title="Go to IMDb" />
                                         </a>
                                     </td>
-                                    <td>
-                                        {externalIds.facebook_id !== null
-                                            ?   <a href={`http://facebook.com/${externalIds.facebook_id}`} rel="noopener noreferrer" target="_blank">
+
+                                    {externalIds.facebook_id !== null
+                                        ?   <td>
+                                                <a href={`http://facebook.com/${externalIds.facebook_id}`} rel="noopener noreferrer" target="_blank">
                                                     <i className="ri-facebook-fill" style={{fontSize:"2.2rem"}}></i>
                                                 </a>
-                                            :   null
-                                        }
-                                    </td>
-                                    <td>
-                                        {externalIds.twitter_id !== null
-                                            ?   <a href={`http://twitter.com/${externalIds.twitter_id}`} rel="noopener noreferrer" target="_blank">
+                                            </td>
+                                        :   null
+                                    }
+
+                                    {externalIds.twitter_id !== null
+                                        ?   <td>
+                                                <a href={`http://twitter.com/${externalIds.twitter_id}`} rel="noopener noreferrer" target="_blank">
                                                     <i className="ri-twitter-fill" style={{fontSize:"2.2rem"}}></i>
                                                 </a>
-                                            :   null
-                                        }
-                                    </td>
-                                    <td>
-                                        {externalIds.instagram_id !== null
-                                            ?   <a href={`http://instagram.com/${externalIds.instagram_id}`} rel="noopener noreferrer" target="_blank">
+                                            </td>
+                                        :   null
+                                    }
+                                    {externalIds.instagram_id !== null
+                                        ?   <td>
+                                                <a href={`http://instagram.com/${externalIds.instagram_id}`} rel="noopener noreferrer" target="_blank">
                                                     <i className="ri-instagram-fill" style={{fontSize:"2.2rem"}}></i>
                                                 </a>
-                                            :   null
-                                        }
-                                    </td>
-                                </tr>
+                                            </td>
+                                        :   null
+                                    }
+                            </tr>
                         </table>
 
-                            <div className="row">
-                                <div className="col-sm-12" style={{padding:"10px 10px 24px 10px", border:"2px solid gray",marginTop:"10px"}}>
-                                    <h4>Watch Options</h4>
-                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white"}}>Buy/Rent</h5>
-                                    {providers.results && providers.results.US && Array.isArray(providers.results.US.buy) 
-                                        ? providers.results.US.buy.map(
-                                            buyoption => (
-                                                <div key={buyoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px",marginBottom:"4px"}}>
-                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} title={buyoption.provider_name} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
-                                                    
-                                                </div>
-                                            )
-                                        ) 
-                                        : "N/A"
-                                    }
-                                    <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white",marginTop:"20px"}}>Streaming</h5>
-                                    {providers.results && providers.results.US && Array.isArray(providers.results.US.flatrate) 
-                                        ? providers.results.US.flatrate.map(
-                                            rentoption => (
-                                                <div key={rentoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px",marginBottom:"4px"}}>
-                                                    <img className=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} title={rentoption.provider_name} style={{width:"100%",height:"100%"}} />
-                                                </div>
-                                            )
-                                        ) 
-                                        : "N/A"
-                                    }                                    
-                                   
-                                </div>    
-                            </div>
+                            <p className="card--desc" style={{marginTop:"20px"}}>{show.overview}</p>
+
+                            <WatchInfo movie={show} source="tv" />
 
                             <ActorInfo cast={cast} />
 
-                            <p className="card--desc" style={{marginTop:"20px"}}>{show.overview}</p>
                             <TvModal details={details} similars={similars} seasons={seasons} />
                         </div>
                     </td>

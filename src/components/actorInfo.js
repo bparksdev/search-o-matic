@@ -1,5 +1,7 @@
 import React, {useState} from 'react'
 import nopic from "../assets/images/nopic.png"
+//import { useRef, Link } from 'react'
+import {Link} from 'react-scroll'
 
 export default function ActorInfo({cast}) {
 
@@ -26,7 +28,7 @@ export default function ActorInfo({cast}) {
 
     function jump(h) {
         var top = document.getElementById(h).offsetTop; //Getting Y of target element
-        window.scroll({top: top+200, behavior: 'smooth'});         
+        //window.scroll({top: top+200, behavior: 'smooth'});         
     }
 
     return (
@@ -41,22 +43,25 @@ export default function ActorInfo({cast}) {
                     <td 
                         key={actor.id} 
                         style={{fontSize:"1.8rem"}}
-                        onClick={() => {
-                            getActorInfo(actor.id)
-                            setTimeout(function() {jump(actor.id)},300)
-                        }}
-
                     >
-                        <table className="castlist">
+                        <table className="castlist"
+
+                        >
                             <tbody>
                             <tr>
-                                <td key={actor.name} style={{border:"none"}}> 
+                                <Link  to={bio.id} spy={true} smooth={true}>
+                                <td key={actor.name} style={{border:"none"}}
+                                    onClick={ function () {
+                                        getActorInfo(actor.id)
+                                    }}                                
+                                >
                                     <img 
                                         src={actor.profile_path ? imageRoot + actor.profile_path : nopic}
                                         alt={actor.name} title="Click for bio"
                                         style={{width:"60px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"}} 
                                     />
                                 </td>
+                                </Link>
                                 <td style={{border:"none"}}> 
                                     <strong>{actor.name}</strong><br />
                                     <span>
