@@ -18,7 +18,7 @@ export default function WatchInfo({movie}) {
     return (
     <div className="row">
         <div className="col-sm-12" style={{padding:"10px 10px 24px 10px", border:"1px solid #85a5de",marginTop:"10px",borderRadius:"5px"}}>
-            <h4>Watch Options</h4>
+            <h4>Where Can I Watch It?</h4>
             <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white"}}>Buy/Rent</h5>
             {providers.results && providers.results.US && Array.isArray(providers.results.US.buy) 
                 ? providers.results.US.buy.map(

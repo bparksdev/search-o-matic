@@ -30,7 +30,8 @@ export default function TvCard({show}) {
         const url = `https://api.themoviedb.org/3/tv/${show.id}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`;
         const res = await fetch(url);
         const data  = await res.json(); 
-        setDetails(data)    
+        setDetails(data)
+        console.log(data)
 
         for(var x=1; x<=details.number_of_seasons; x++) {
             const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
