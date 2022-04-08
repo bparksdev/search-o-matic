@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from "react";
 import MovieModal from "./movieModal"
-import { isArray } from "util"
+//import { isArray } from "util"
 import imdbLogo from "./assets/images/imdb.png"
 import ActorInfo from "./components/actorInfo"
 import WatchInfo from "./components/watchInfo"
@@ -87,18 +87,18 @@ export default function MovieCard({movie}) {
                             </h3>
                             <div className="row">
                                 <div className="col-sm-2">
-                                    <small>RELEASE DATE:<div>{movie.release_date ? movie.release_date : "In Production"}</div></small>
+                                    <small>RELEASE DATE:<div>&nbsp;{movie.release_date ? movie.release_date : "In Production"}</div></small>
                                 </div>
                                 <div className="col-sm-2">
                                     <small>
-                                        GENRE(S):<div>
-                                        {isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}</div>
+                                        GENRE(S):<div>&nbsp;
+                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}</div>
                                     </small>
                                 </div>
                                 <div className="col-sm-2">
                                     <small>
                                     DIRECTOR:<div>{crew.filter(person => person.job === 'Director').map(person => (
-                                       <li key={person.id}><a href={`/people/${person.name}`}>{person.name}</a></li>
+                                       <li key={person.id}>&nbsp;<a href={`/people/${person.name}`}>{person.name}</a></li>
                                     ))}
                                     </div>
                                     </small>
@@ -107,19 +107,19 @@ export default function MovieCard({movie}) {
                                     <small>
                                     SCREENPLAY:<div>
                                     {crew.filter(person => person.job === 'Screenplay').map(person => (
-                                       <li key={person.id}><a href={`/people/${person.name}`}>{person.name}</a></li>
+                                       <li key={person.id}>&nbsp;<a href={`/people/${person.name}`}>{person.name}</a></li>
                                     ))}
                                     </div>
                                     </small>
                                 </div>                                
                                 <div className="col-sm-2">
                                     <small>
-                                    RUNTIME:<div>{details.runtime ? `${details.runtime} mins` : "TBD"}</div>
+                                    RUNTIME:<div>&nbsp;{details.runtime ? `${details.runtime} mins` : "TBD"}</div>
                                     </small>
                                 </div>                                
                                 <div className="col-sm-2">
                                     <small>
-                                        RATING:<div>{movie.vote_average ? `${movie.vote_average} out of 10` : "TBD"}</div>
+                                        RATING:<div>&nbsp;{movie.vote_average ? `${movie.vote_average} out of 10` : "TBD"}</div>
                                     </small>
                                 </div>
                             </div>

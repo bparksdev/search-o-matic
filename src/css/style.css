@@ -18,6 +18,7 @@ body {
 
 p {
     font-size: 1.6rem;
+    line-height: 20px;
 }
 
 small {
@@ -81,6 +82,9 @@ h4 {
     font-weight: 600;
 }
 
+.table-responsive {
+    display: table;
+}
 
 .card-list {
     margin-top: 4rem;
@@ -126,11 +130,15 @@ h4 {
 .detailItems {
     margin-left: 2px;
     border: 1px solid lightgray;
-    border-radius: 5px;
     padding: 4px 11px;
     background-color: #fff;
-    text-align: center;
     
+}
+
+.blueHeader {
+    padding: 5px; 
+    margin-top: 15px; 
+    background-color: rgb(109, 142, 170);
 }
 
 nav {
@@ -317,15 +325,12 @@ nav {
     .row {
         display: inherit;
     }
-    #poweredby {
-        display: none;
-    }
     .label {
         text-align: center;
     }
     .button {
         background-color: rgb(11, 28, 68);
-        width:50%;
+        min-width: 101px;
         margin-right: auto;
         margin-left: auto;
     }
