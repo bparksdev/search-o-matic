@@ -112,7 +112,7 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                             {recommendations.results !== undefined
                                 ? recommendations.results.map(show => (
                                     <li key={show.id}> 
-                                        <a href={`/shows/${show.original_name}/${show.id}`}>{show.original_name}</a>
+                                        <a href={`/show/${show.original_name}/${show.id}`}>{show.original_name}</a>
                                     </li>                                        
                                 )) 
                                 : "None"

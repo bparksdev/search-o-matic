@@ -31,7 +31,7 @@ class Main extends React.Component {
           <NavBar/>
             <div>
                 <Switch>
-                    <Route path = "/show/:query" component={TvDisplay} />
+                    <Route path = "/show/:query/:showId" component={TvDisplay} />
                     <Route path = "/movie/:query/:movieId" component={MovieDisplay} />
                     <Route path = "/people/:query" component={PeopleDisplay} />
                     <Route path="/movies" component={SearchMovies} />
