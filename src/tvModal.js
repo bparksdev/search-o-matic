@@ -3,7 +3,7 @@ import Modal from 'react-bootstrap/Modal'
 
 import { Button } from 'react-bootstrap';
 
-const TvModal = ({details, similars, seasons}) => {
+const TvModal = ({details, similars, seasons, recommendations}) => {
     const [show, setShow] = useState(false);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
@@ -26,7 +26,7 @@ const TvModal = ({details, similars, seasons}) => {
     return (
     <>
         <Button variant="primary btn-lg mt-5" onClick={handleShow}>
-          More Info
+            More Info
         </Button>
   
         <Modal 
@@ -84,7 +84,7 @@ const TvModal = ({details, similars, seasons}) => {
                             </div>    
                         </td>
                     </tr>
-                    <tr>
+                    {/* <tr>
                         <td className="detailItems" style={{textAlign:"left"}}>
                             <h4 className="blueHeader">Similar Shows</h4>
                             <div style={{maxHeight:"400px",overflowX:"scroll"}}>
@@ -100,9 +100,27 @@ const TvModal = ({details, similars, seasons}) => {
                                 </ul>
                             </div>                                
                         </td>
-                    </tr>
+                    </tr> */}
 
-                </table>                    
+                </table>     
+
+                <table className="table table-responsive">
+                    <tr>
+                        <td className="detailItems">
+                            <h4 className="blueHeader">If you liked "{details.name}", you might like...</h4>
+                            <ul>
+                            {recommendations.results !== undefined
+                                ? recommendations.results.map(show => (
+                                    <li key={show.id}> 
+                                        <a href={`/shows/${show.original_name}/${show.id}`}>{show.original_name}</a>
+                                    </li>                                        
+                                )) 
+                                : "None"
+                            }
+                            </ul>
+                        </td>
+                    </tr>
+                </table>   
                 
             </Modal.Body>
             <Modal.Footer>

@@ -9,6 +9,7 @@ export default function TvCard({show}) {
     const [details, setDetails] = useState([])
     const [cast, setCast] = useState([])
     const [similars, setSimilars] = useState([])
+    const [recommendations, setRecommendations] = useState([])
     const [externalIds, setExternalIDs] = useState([])
     const [seasons, setSeasons] = useState([])
     const allSeasons = []
@@ -18,6 +19,7 @@ export default function TvCard({show}) {
         getCast()
         getSimilars()
         getExternalIDs()
+        getRecommendations()
         // eslint-disable-next-line
     }, [])
 
@@ -33,7 +35,6 @@ export default function TvCard({show}) {
         const res = await fetch(url);
         const data  = await res.json(); 
         setDetails(data)
-        console.log(data)
 
         for(var x=1; x<=details.number_of_seasons; x++) {
             const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
@@ -58,6 +59,13 @@ export default function TvCard({show}) {
         const data  = await res.json(); 
         setSimilars(data)
     }    
+
+    const getRecommendations = async () => {
+        const url = `https://api.themoviedb.org/3/tv/${show.id}/recommendations?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const res = await fetch(url);
+        const data  = await res.json(); 
+        setRecommendations(data)
+    }     
 
     const getExternalIDs = async () => {
         const url = `https://api.themoviedb.org/3/tv/${show.id}/external_ids?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
@@ -178,7 +186,7 @@ export default function TvCard({show}) {
 
                             <ActorInfo cast={cast} />
 
-                            <TvModal details={details} similars={similars} seasons={seasons} />
+                            <TvModal details={details} similars={similars} seasons={seasons} recommendations={recommendations} />
                         </div>
                     </td>
                 </tr>
