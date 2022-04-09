@@ -4,13 +4,14 @@ export default function WatchInfo({movie}) {
    
     const [providers, setProviders] = useState([])
     // eslint-disable-next-line
-    const getProviders = async () => {
-        const url = `https://api.themoviedb.org/3/${arguments[0].source}/${movie.id}/watch/providers?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
-        const res = await fetch(url);
-        const providers  = await res.json()
-        setProviders(providers)
+    const getProviders = () => {
+        fetch( `https://api.themoviedb.org/3/${arguments[0].source}/${movie.id}/watch/providers?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US` )
+            .then( res => res.json() )
+            .then( providers => {
+                setProviders(providers)
+            })    
     }
-
+    
     useEffect(() => {
         getProviders()
     }, [getProviders]) 

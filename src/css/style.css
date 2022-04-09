@@ -60,7 +60,7 @@ small {
 }
 
 .button {
-    background-color: rgba(0,0,0,0.75);
+    background-color: #6a85a0;
     color: white;
     padding: 1rem 2rem;
     border: 1px solid rgba(0,0,0,0.75);
@@ -84,6 +84,10 @@ h4 {
 
 .table-responsive {
     display: table;
+}
+
+.header {
+    background-color: #0a214a;
 }
 
 .card-list {
@@ -329,7 +333,7 @@ nav {
         text-align: center;
     }
     .button {
-        background-color: rgb(11, 28, 68);
+        background-color: #6a85a0;
         min-width: 101px;
         margin-right: auto;
         margin-left: auto;
@@ -387,6 +391,10 @@ nav {
     }
     .actor-blurb {
         font-size: 1.2rem;
+    }
+
+    body {
+        background-size: 25%;
     }
     
 }
