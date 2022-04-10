@@ -109,7 +109,7 @@ export default function ActorInfo({cast}) {
                                 <li key={key}>
                                     {credit.title 
                                         ? <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
-                                        : <a href={`/show/${credit.name}`}>{credit.name}</a>
+                                        : <a href={`/show/${credit.name}/${credit.id}`}>{credit.name}</a>
                                     }
                                     &nbsp;
                                     ({credit.first_air_date
@@ -123,9 +123,9 @@ export default function ActorInfo({cast}) {
                         </div>
                     </div>
                     
-                    {/*bio.biography || credits ?
+                    {/* {bio.biography || credits ?
                         <a 
-                            href={`https://www.imdb.com/name/${bio.imdb_id}/`}
+                            href={`http://imdb.com/name/${bio.imdb_id}/?ref_=nv_sr_srsg_0`}
                             style={{marginTop:"20px",display:"block"}}
                             target="_blank"
                             rel="noopener noreferrer"
@@ -133,7 +133,7 @@ export default function ActorInfo({cast}) {
                             {bio.name}'s IMDb Profile
                         </a>
                         : null
-                    */}
+                    } */}
                 </td>    
             </tr>  
             </tbody>                             

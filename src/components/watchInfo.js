@@ -14,7 +14,7 @@ export default function WatchInfo({movie}) {
     
     useEffect(() => {
         getProviders()
-    }, [getProviders]) 
+    }, []) 
 
     return (
     <div className="row">

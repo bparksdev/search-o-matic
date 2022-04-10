@@ -1,11 +1,10 @@
 import React, {useState, useEffect} from "react"
 import TvModal from "./tvModal"
 import ActorInfo from "./components/actorInfo"
-//import { isArray } from "util"
 import imdbLogo from "./assets/images/imdb.png"
 import WatchInfo from "./components/watchInfo"
 
-export default function TvCard({show}) {
+export default function TvCard( { show } ) {
     const [details, setDetails] = useState([])
     const [cast, setCast] = useState([])
     const [similars, setSimilars] = useState([])
@@ -16,17 +15,28 @@ export default function TvCard({show}) {
  
     useEffect(() => {
         getDetails()    
-        getCast()
-        getSimilars()
-        getExternalIDs()
-        getRecommendations()
-        // eslint-disable-next-line
     }, [])
+
+    useEffect(() => {
+        getCast()
+    }, [])    
+
+    useEffect(() => {
+        getSimilars()
+    }, [])
+
+    useEffect(() => {
+        getExternalIDs()
+    }, [])
+
+    useEffect(() => {
+        getRecommendations()
+    }, [])    
 
     useEffect(() => {
         getSeasons()
         // eslint-disable-next-line
-    }, [details])    
+    }, [])    
     
     
     var dispDate = new Date(show.first_air_date)
@@ -35,6 +45,7 @@ export default function TvCard({show}) {
         const res = await fetch(url);
         const data  = await res.json(); 
         setDetails(data)
+
 
         for(var x=1; x<=details.number_of_seasons; x++) {
             const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
