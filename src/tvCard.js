@@ -36,7 +36,7 @@ export default function TvCard( { show } ) {
     useEffect(() => {
         getSeasons()
         // eslint-disable-next-line
-    }, [])    
+    }, [details])    
     
     
     var dispDate = new Date(show.first_air_date)
