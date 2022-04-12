@@ -63,7 +63,7 @@ const PeopleCard = ({person}) => {
                             {credits.length !== 0
                                 ?   credits.cast.sort((a, b) => parseInt(a.first_air_date) - parseInt(b.first_air_date)).filter(credit => credit.name).map((credit, key) => 
                                         <div key={key}>
-                                            <a href={`/show/${credit.name}`}>{credit.name}</a>
+                                            <a href={`/show/${credit.name}/${credit.id}`}>{credit.name}</a>
                                             &nbsp; {credit.character !== '' ? ` - ${credit.character}`  : null}
                                         </div>
                                     )
