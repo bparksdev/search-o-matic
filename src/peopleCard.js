@@ -79,7 +79,7 @@ const PeopleCard = ({person}) => {
                                     <li key={key}>
                                         {credit.title 
                                             ? <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
-                                            : <a href={`/show/${credit.name}`}>{credit.name}</a>
+                                            : <a href={`/show/${credit.name}/${credit.id}`}>{credit.name}</a>
                                         }
                                         &nbsp; {credit.department !== '' ? ` - ${credit.department}`  : null}
                                     </li>
