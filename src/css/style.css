@@ -145,6 +145,15 @@ h4 {
     background-color: rgb(109, 142, 170);
 }
 
+.box-shadow {
+    box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.75);
+    -webkit-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 5px 6px 5px 0px rgba(0,0,0,0.75);
+    padding: 12px;
+    width: 100%;
+    background-color: #e3e3e3    
+}
+
 nav {
     text-align: center;
     font-size: 2rem;

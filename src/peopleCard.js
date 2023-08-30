@@ -31,7 +31,7 @@ const PeopleCard = ({person}) => {
                 <div className="col-sm-3">
                     <img 
                         src={details.profile_path ? "https://image.tmdb.org/t/p/w200" + details.profile_path : nopic}
-                        alt={details.name} className="headshot"
+                        alt={details.name} className="headshot box-shadow"
                         style={{width:"100%"}}
                     />
                 </div>

@@ -5,7 +5,7 @@ const NavBar = () => {
     return (
         <div className="header">
             <div style={{paddingBottom:"4px"}}>
-                <div style={{fontSize:"1.2rem",color:"#e0e0e0",textAlign:"center"}}>&copy; 2022 SkrapHeap Development</div>
+                
                 <h1 className="title">
                     TV/Movie Search-O-Matic &trade;
                 </h1>
@@ -14,6 +14,7 @@ const NavBar = () => {
                     &nbsp;
                     <a href="https://developers.themoviedb.org/3/getting-started/introduction" rel="noopener noreferrer" target="_blank">The Movie Database API</a> 
                     &nbsp;and <a href="https://www.justwatch.com/" rel="noopener noreferrer" target="_blank">JustWatch</a>
+                    <div style={{fontSize:"1.2rem",color:"#e0e0e0",textAlign:"center"}}>&copy; 2023 SkrapHeap Development</div>
                 </div>
             </div>            
 

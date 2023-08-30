@@ -96,7 +96,7 @@ export default function ActorInfo({cast}) {
                     <div className="row" style={{marginRight:"-6px"}}>    
                         <div className="col-sm-3">
                             {bio.profile_path
-                                ? <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${bio.profile_path}`} className="headshot" alt={bio.name} />
+                                ? <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${bio.profile_path}`} className="headshot box-shadow" alt={bio.name} />
                                 : null
                             }
                         </div>
