@@ -9,7 +9,7 @@ const NavBar = () => {
                 <h1 className="title">
                     Entertainment Content Search
                 </h1>
-                <h2>Where can I watch it?</h2>
+                <h2 style={{color:"white",textAlign:"center"}}>Where can I watch it?</h2>
                 <div id="poweredby" style={{fontSize:"1.3rem",paddingRight:"5px",color:"white",textAlign:"center"}}>
                     Powered By 
                     &nbsp;
