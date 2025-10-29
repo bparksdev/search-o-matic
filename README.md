@@ -66,3 +66,14 @@ This section has moved here: https://facebook.github.io/create-react-app/docs/de
 ### `npm run build` fails to minify
 
 This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+
+### Configuration
+
+This project uses The Movie Database (TMDB) API. To run the app locally, create a local environment file with your TMDB API key. You can copy `.env.example` to `.env.local` or `.env` and set the REACT_APP_TMDB_KEY variable:
+
+```bash
+cp .env.example .env.local
+# then edit .env.local and replace the placeholder
+```
+
+Ensure you do NOT commit your real API key to the repository. The React app will read the key from process.env.REACT_APP_TMDB_KEY at build time.
