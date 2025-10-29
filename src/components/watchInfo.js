@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 
+// Prefer environment variable; fall back to empty string and warn.
+const TMDB_KEY = process.env.REACT_APP_TMDB_KEY || "";
+
 /**
  * WatchInfo
  * - Fetches TMDB "watch/providers" for a given movie/tv object.
@@ -8,9 +11,6 @@ import React, { useState, useEffect } from "react";
 export default function WatchInfo({ movie }) {
   const [providers, setProviders] = useState(null);
   const [error, setError] = useState(null);
-
-  // Prefer environment variable; fall back to empty string and warn.
-  const TMDB_KEY = process.env.REACT_APP_TMDB_KEY || "";
 
   useEffect(() => {
     if (!movie || !movie.id) {
@@ -36,7 +36,6 @@ export default function WatchInfo({ movie }) {
 
     const url = `https://api.themoviedb.org/3/${mediaType}/${movie.id}/watch/providers?api_key=${TMDB_KEY}&language=en-US`;
 
-    let didCancel = false;
     async function fetchProviders() {
       setError(null);
       try {
@@ -45,28 +44,24 @@ export default function WatchInfo({ movie }) {
           throw new Error(`HTTP ${res.status} ${res.statusText}`);
         }
         const data = await res.json();
-        if (!didCancel) setProviders(data);
+        setProviders(data);
       } catch (err) {
         if (err.name === "AbortError") {
           // ignore aborts
           return;
         }
         console.warn("Failed to load watch providers:", err);
-        if (!didCancel) {
-          setError("Failed to load providers");
-          setProviders(null);
-        }
+        setError("Failed to load providers");
+        setProviders(null);
       }
     }
 
     fetchProviders();
 
     return () => {
-      didCancel = true;
       controller.abort();
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [movie?.id, movie?.media_type, TMDB_KEY]);
+  }, [movie]);
 
   function renderProviderSection(title, items) {
     if (items && items.length > 0) {
