@@ -9,7 +9,9 @@ export default function ActorInfo({cast}) {
     const [credits, setCredits] = useState([])
     const [bio, setBio] = useState([])
     
-    const imageRoot = 'https://image.tmdb.org/t/p/w185_and_h278_bestv2'
+    const imageRoot = 'https://image.tmdb.org/t/p/original'
+
+    //https://image.tmdb.org/t/p/w200
 
     const getActorInfo = async (actorid) => {
         setBio("")
@@ -25,6 +27,23 @@ export default function ActorInfo({cast}) {
         const data2  = await res2.json(); 
         setCredits(data2.cast)        
     }
+
+    // derive separate lists for movies and TV from combined credits
+    const movieCredits = Array.isArray(credits)
+        ? credits.filter(c => c.media_type === 'movie' || Boolean(c.title)).sort((a, b) => {
+            const ya = a.release_date ? parseInt(a.release_date.substring(0,4)) : 0
+            const yb = b.release_date ? parseInt(b.release_date.substring(0,4)) : 0
+            return ya - yb
+        })
+        : []
+
+    const tvCredits = Array.isArray(credits)
+        ? credits.filter(c => c.media_type === 'tv' || Boolean(c.name)).sort((a, b) => {
+            const ya = a.first_air_date ? parseInt(a.first_air_date.substring(0,4)) : 0
+            const yb = b.first_air_date ? parseInt(b.first_air_date.substring(0,4)) : 0
+            return ya - yb
+        })
+        : []
 
     return (
         <>
@@ -53,7 +72,7 @@ export default function ActorInfo({cast}) {
                                     <img 
                                         src={actor.profile_path ? imageRoot + actor.profile_path : nopic}
                                         alt={actor.name} title="Click for bio"
-                                        style={{width:"60px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"}} 
+                                        style={actor.profile_path ? {height:"192px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"} : {width:"100px",height:"130px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"}}
                                     />
                                 </td>
                                 </Link>
@@ -93,10 +112,10 @@ export default function ActorInfo({cast}) {
                         setBioClassName('bioClosed')
                         }
                     }>
-                    <div className="row" style={{marginRight:"-6px"}}>    
+                    <div className="row" style={{marginLeft:"-4px",backgroundColor:"black", width:"100%"}}>    
                         <div className="col-sm-3">
                             {bio.profile_path
-                                ? <img src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2${bio.profile_path}`} className="headshot box-shadow" alt={bio.name} />
+                                ? <img src={`https://image.tmdb.org/t/p/w200${bio.profile_path}`} className="headshot box-shadow" alt={bio.name} />
                                 : null
                             }
                         </div>
@@ -105,21 +124,32 @@ export default function ActorInfo({cast}) {
                             {bio.biography}
                             <hr />
                             <h4>Acting Credits ({credits.length})</h4>
-                            {[...credits].sort((a, b) => parseInt(a.release_date) - parseInt(b.release_date)).map((credit,key) => 
-                                <li key={key}>
-                                    {credit.title 
-                                        ? <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
-                                        : <a href={`/show/${credit.name}/${credit.id}`}>{credit.name}</a>
-                                    }
-                                    &nbsp;
-                                    ({credit.first_air_date
-                                        ? "TV"
-                                        : credit.release_date !== '' && credit.release_date
-                                            ? credit.release_date.substring(0,4)
-                                            : "In Production" 
-                                    })
-                                </li>
-                            )}                                                    
+
+                            {movieCredits.length > 0 && (
+                                <div>
+                                    <strong>Movies</strong>
+                                    {movieCredits.map((credit, key) => (
+                                        <li key={`m-${key}`}>
+                                            <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title || credit.name}</a>
+                                            &nbsp; {credit.release_date ? `(${credit.release_date.substring(0,4)})` : null}
+                                            &nbsp; {credit.character ? ` - ${credit.character}` : null}
+                                        </li>
+                                    ))}
+                                </div>
+                            )}
+
+                            {tvCredits.length > 0 && (
+                                <div>
+                                    <strong>TV</strong>
+                                    {tvCredits.map((credit, key) => (
+                                        <li key={`t-${key}`}>
+                                            <a href={`/show/${credit.name}/${credit.id}`}>{credit.name || credit.title}</a>
+                                            &nbsp; {credit.first_air_date ? `(${credit.first_air_date.substring(0,4)})` : null}
+                                            &nbsp; {credit.character ? ` - ${credit.character}` : null}
+                                        </li>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </div>
                     

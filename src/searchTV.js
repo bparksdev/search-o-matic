@@ -14,8 +14,42 @@ const SearchTV = () => {
         try {
             const res = await fetch(url)
             const data  = await res.json()
-            
-            setShows(data.results)
+            // normalize helper and prioritization: raw exact, normalized exact, length proximity, then popularity
+            const normalize = (s) => (s || '').toString().toLowerCase().replace(/[^a-z0-9]/g, '')
+            const qnorm = normalize(querytv)
+            const getPrimary = (item) => (item && (item.name || item.original_name || '')).toString()
+
+            const sorted = (data.results || []).slice().sort((a, b) => {
+                const aTitle = getPrimary(a)
+                const bTitle = getPrimary(b)
+                const aRaw = aTitle.toLowerCase().trim()
+                const bRaw = bTitle.toLowerCase().trim()
+                const qRaw = querytv.toLowerCase().trim()
+
+                const aExactRaw = aRaw === qRaw
+                const bExactRaw = bRaw === qRaw
+                if (aExactRaw && !bExactRaw) return -1
+                if (bExactRaw && !aExactRaw) return 1
+
+                const aNorm = normalize(aTitle)
+                const bNorm = normalize(bTitle)
+                const aExact = aNorm === qnorm
+                const bExact = bNorm === qnorm
+                if (aExact && !bExact) return -1
+                if (bExact && !aExact) return 1
+
+                if (aExact && bExact) {
+                    const aDiff = Math.abs(aTitle.length - querytv.length)
+                    const bDiff = Math.abs(bTitle.length - querytv.length)
+                    if (aDiff !== bDiff) return aDiff - bDiff
+                }
+
+                const aScore = (a.popularity || a.vote_average || 0)
+                const bScore = (b.popularity || b.vote_average || 0)
+                return bScore - aScore
+            })
+
+            setShows(sorted)
             //console.log(data)
         } catch(err) {
             console.error(err);

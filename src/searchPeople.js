@@ -24,7 +24,7 @@ const SearchPeople = () => {
         <>
             <form className="form" onSubmit={searchTV}>
                 <label className="label" htmlFor="querytv">Cast Member/Crew Member</label>
-                <input className="input" type="text" name="querytv"  required="true"
+                <input className="input" type="text" name="querytv"  required
                     placeholder="i.e. Steven Spielberg"
                     value={queryPerson} onChange={(e) => setQueryPerson(e.target.value)}
                 />

@@ -41,7 +41,7 @@ const MovieModal = ({details, similars, recommendations}) => {
                         </td>
                     </tr>
                     <tr>
-                        <td className="detailItems">
+                        <td className="detailItems" style={{marginTop:"8px"}}>
                             <h4>Production Companies</h4>
                             {details.production_companies !== undefined 
                                 ? details.production_companies.map(company => (<li style={{textAlign:"left"}} key={company.id}>{company.name}</li>)) 
@@ -53,13 +53,13 @@ const MovieModal = ({details, similars, recommendations}) => {
 
                 <table className="table table-responsive">
                     <tr>
-                        <td className="">
-                            <div className="" style={{backgroundColor:`${revBackgroundColor}`,padding:"5px"}}>
+                        <td className="detailItems">
+                            <div className="" style={{padding:"5px"}}>
                                 <span>
                                     <h4 style={{display:"inline"}}>Budget: </h4>
                                     {details.budget !== 0 ? numberFormat(details.budget) : "Unknown"}
                                 </span>
-                                <span style={{marginLeft:"10px"}}>
+                                <span style={{display:"block"}}>
                                     <h4 style={{display:"inline"}}>Revenue: </h4>
                                     {details.revenue !== 0 ? numberFormat(details.revenue) : "Unknown"}
                                 </span>    

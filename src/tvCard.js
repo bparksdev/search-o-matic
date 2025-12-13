@@ -107,7 +107,7 @@ export default function TvCard( { show } ) {
     }    
 
     return (
-         <div className="card" style={style}>
+         <div className="card">
             <table>
                 <tbody>
                 <tr>

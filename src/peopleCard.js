@@ -25,6 +25,27 @@ const PeopleCard = ({person}) => {
         // eslint-disable-next-line
     }, []) 
 
+    // normalize credits into separate lists for movies and tv
+    const movieList = (credits && Array.isArray(credits.cast))
+        ? credits.cast
+            .filter(c => (c.media_type === 'movie') || Boolean(c.title))
+            .sort((a, b) => {
+                const ya = a.release_date ? parseInt(a.release_date.substring(0,4)) : 0
+                const yb = b.release_date ? parseInt(b.release_date.substring(0,4)) : 0
+                return ya - yb
+            })
+        : []
+
+    const tvList = (credits && Array.isArray(credits.cast))
+        ? credits.cast
+            .filter(c => (c.media_type === 'tv') || Boolean(c.name))
+            .sort((a, b) => {
+                const ya = a.first_air_date ? parseInt(a.first_air_date.substring(0,4)) : 0
+                const yb = b.first_air_date ? parseInt(b.first_air_date.substring(0,4)) : 0
+                return ya - yb
+            })
+        : []
+
     return (
         <div className="card">
             <div className="row">
@@ -32,7 +53,7 @@ const PeopleCard = ({person}) => {
                     <img 
                         src={details.profile_path ? "https://image.tmdb.org/t/p/w200" + details.profile_path : nopic}
                         alt={details.name} className="headshot box-shadow"
-                        style={{width:"100%"}}
+                        
                     />
                 </div>
                 <div className="col-sm-8">
@@ -42,17 +63,17 @@ const PeopleCard = ({person}) => {
                     </div>
                     <hr />
                     <h3>Acting Credits</h3>
-                    <div className="row">
+                    {/* <div className="row">
                         <div className="col-sm-6"><h4>MOVIES</h4></div>
                         <div className="col-sm-6"><h4>TV</h4></div>
-                    </div>
+                    </div> */}
                     <div className="row person-credits">
                         <div className="col-sm-6">
                             {credits.length !== 0
                                 ?   credits.cast.sort((a, b) => parseInt(a.release_date) - parseInt(b.release_date)).filter(credit => credit.title).map((credit, key) => 
-                                        <div key={key}>
+                                        <div key={key} className="credits-item">
                                             <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
-                                            &nbsp; {credit.release_date ? `(${credit.release_date.substring(0,4)})` : null}
+                                            &nbsp; {credit.release_date ? `(Movie - ${credit.release_date.substring(0,4)})` : null}
                                             &nbsp; {credit.character !== '' ? ` - ${credit.character}`  : null}
                                         </div>
                                     )
@@ -62,9 +83,9 @@ const PeopleCard = ({person}) => {
                         <div className="col-sm-6">
                             {credits.length !== 0
                                 ?   credits.cast.sort((a, b) => parseInt(a.first_air_date) - parseInt(b.first_air_date)).filter(credit => credit.name).map((credit, key) => 
-                                        <div key={key}>
-                                            <a href={`/show/${credit.name}/${credit.id}`}>{credit.name}</a>
-                                            &nbsp; {credit.character !== '' ? ` - ${credit.character}`  : null}
+                                        <div key={key} className="credits-item">
+                                            <a href={`/show/${credit.name}/${credit.id}`}>{credit.name}</a> 
+                                            &nbsp; (TV) {credit.character !== '' ? ` - ${credit.character}`  : null}
                                         </div>
                                     )
                                 : null
@@ -76,7 +97,7 @@ const PeopleCard = ({person}) => {
                     <div className="person-credits">
                         {credits.length !== 0
                             ?   credits.crew.filter(credit => credit.department).sort((a, b) => a.id - b.id).map((credit, key) => 
-                                    <li key={key}>
+                                    <li key={key} className="credits-item">
                                         {credit.title 
                                             ? <a href={`/movie/${credit.title}/${credit.id}`}>{credit.title}</a>
                                             : <a href={`/show/${credit.name}/${credit.id}`}>{credit.name}</a>

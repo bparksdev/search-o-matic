@@ -12,12 +12,15 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
     try {
         seasonInfo = seasons.map((season,key) => (
         <h5 key={key}>
-            <span style={{borderBottom:"1px solid gray"}}>Season {season.season_number}</span>
-            <ol>
+            <span style={{borderBottom:"1px solid gray"}}>
+                Season {season.season_number}
+                &nbsp;({Array.isArray(season.episodes) ? season.episodes.length : 0} episodes)
+            </span>
+            <div>
                 {season.episodes.map((episode,key) => 
-                    <li className="episodes" key={key} title={episode.air_date + ": " + episode.overview} style={{cursor:"default"}}>{episode.name}</li>
+                    <div className="episodes" key={key} title={episode.air_date + ": " + episode.overview} style={{cursor:"default", marginLeft: '2ch'}}>{episode.name}</div>
                 )}
-            </ol>
+            </div>
         </h5>))
     } catch (e) {
         seasonInfo = "Not available"
@@ -38,7 +41,7 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                 <Modal.Title><h2>{details.name} - More Info</h2></Modal.Title>
             </Modal.Header>
             <Modal.Body style={{backgroundColor:"#09243e"}}>
-                <table className="table table-responsive">
+                <table className="table">
                     <tr>
                         <td className="detailItems" style={{width:"100%"}}>
                             <strong>AIR DATES:</strong> {details.first_air_date} to {details.last_air_date}
@@ -47,7 +50,11 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                     <tr>
                         <td className="detailItems">
                                 <strong>GENRE(S):</strong>
-                                {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
+                                {Array.isArray(details.genres) ? (
+                                    <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
+                                        {details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>))}
+                                    </ul>
+                                ) : ""}
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +65,11 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                     <tr>
                         <td className="detailItems">
                                 <strong>ORIGINAL NETWORK(S):</strong>
-                            {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
+                            {Array.isArray(details.networks) ? (
+                                <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
+                                    {details.networks.map(network => (<li key={network.id}>{network.name}</li>))}
+                                </ul>
+                            ) : ""}
                         </td>
                     </tr>
                     <tr>
@@ -69,7 +80,11 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                                 <span> {details.number_of_episodes}</span><br />
                                 <strong>Created By</strong>
                                 {details.created_by !== undefined 
-                                    ? details.created_by.map(creator => (<li style={{textAlign:"left"}} key={creator.id}>{creator.name}</li>)) 
+                                    ? (
+                                        <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
+                                            {details.created_by.map(creator => (<li style={{textAlign:"left"}} key={creator.id}>{creator.name}</li>))}
+                                        </ul>
+                                      )
                                     : ""
                                 }
                         </td>
@@ -108,7 +123,7 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                     <tr>
                         <td className="detailItems">
                             <h4 className="blueHeader">If you liked "{details.name}", you might like...</h4>
-                            <ul>
+                            <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
                             {recommendations.results !== undefined
                                 ? recommendations.results.map(show => (
                                     <li key={show.id}> 
