@@ -15,7 +15,7 @@ const NavBar = () => {
                     &nbsp;
                     <a href="https://developers.themoviedb.org/3/getting-started/introduction" rel="noopener noreferrer" target="_blank">The Movie Database API</a> 
                     &nbsp;and <a href="https://www.justwatch.com/" rel="noopener noreferrer" target="_blank">JustWatch</a>
-                    <div style={{fontSize:"1.2rem",color:"#e0e0e0",textAlign:"center"}}>&copy; 2024 SkrapHeap Development</div>
+                    <div style={{fontSize:"1.2rem",color:"#e0e0e0",textAlign:"center"}}>&copy; 2025 SkrapHeap Development</div>
                 </div>
             </div>            
 
@@ -43,6 +43,15 @@ const NavBar = () => {
                             activeClassName="currentnav"
                         >
                             People
+                        </NavLink>
+                    </li>
+
+                    <li>
+                        <NavLink
+                            to="/my-list"
+                            activeClassName="currentnav"
+                        >
+                            My List
                         </NavLink>
                     </li>
 

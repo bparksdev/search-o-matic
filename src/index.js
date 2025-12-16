@@ -10,6 +10,7 @@ import PeopleDisplay from "./peopleDisplay";
 import SearchMovies from "./searchMovies";
 import SearchTV from "./searchTV";
 import SearchPeople from "./searchPeople";
+import MyList from "./MyList";
 
 class Main extends React.Component {
     state = {
@@ -37,6 +38,7 @@ class Main extends React.Component {
                     <Route path="/movies" component={SearchMovies} />
                     <Route path="/shows" component={SearchTV} />
                     <Route path="/people" component={SearchPeople} />
+                    <Route path="/my-list" component={MyList} />
                 </Switch>           
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from "react"
+import SaveButton from './utils/saveButton'
 import TvModal from "./tvModal"
 import ActorInfo from "./components/actorInfo"
 import imdbLogo from "./assets/images/imdb.png"
@@ -120,6 +121,13 @@ export default function TvCard( { show } ) {
                                 />
                             : null
                         }
+                        {externalIds && externalIds.imdb_id ? (
+                            <div style={{marginTop:8}}>
+                                <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank">
+                                    <img src={imdbLogo} className="imdb-logo" style={{width:60}} alt="IMDb" title="Go to IMDb" />
+                                </a>
+                            </div>
+                        ) : null}
                         <div className="alert alert-info mt-4" style={{opacity: "0.8", width:"90%"}}>
                                 <div>
                                     <small><strong>AIR DATES:</strong> {show.first_air_date} to {details.last_air_date}</small>
@@ -154,6 +162,9 @@ export default function TvCard( { show } ) {
                         <div className="card--content" key={show.id}>
                             <h3 className="card--title">
                                 {show.name} ({dispDate.getFullYear()})
+                                <span style={{float:"right"}}>
+                                    <SaveButton show={show} />
+                                </span>
                             </h3>
                             <table className="table text-center">
                                 <tr>

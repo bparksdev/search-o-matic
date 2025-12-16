@@ -26,6 +26,13 @@ export default function ActorInfo({cast}) {
         const res2 = await fetch(url2);
         const data2  = await res2.json(); 
         setCredits(data2.cast)        
+        // after loading bio and credits, scroll down to the bio section
+        try {
+            setTimeout(() => {
+                const el = document.getElementById(data.id)
+                if (el && el.scrollIntoView) el.scrollIntoView({behavior: 'smooth', block: 'start'})
+            }, 80)
+        } catch (e) {}
     }
 
     // derive separate lists for movies and TV from combined credits
@@ -72,7 +79,7 @@ export default function ActorInfo({cast}) {
                                     <img 
                                         src={actor.profile_path ? imageRoot + actor.profile_path : nopic}
                                         alt={actor.name} title="Click for bio"
-                                        style={actor.profile_path ? {height:"192px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"} : {width:"100px",height:"130px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"}}
+                                        style={actor.profile_path ? {height:"140px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"} : {width:"100px",height:"130px",paddingRight:"2px",pointerEvents: "all",margin:"4px",borderRadius:"15px"}}
                                     />
                                 </td>
                                 </Link>

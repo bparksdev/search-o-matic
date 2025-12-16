@@ -5,21 +5,39 @@ import { Button } from 'react-bootstrap';
 
 const TvModal = ({details, similars, seasons, recommendations}) => {
     const [show, setShow] = useState(false);
+    const [expandedEpisodes, setExpandedEpisodes] = useState([]);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     var seasonInfo = null
 
+    const toggleEpisode = (id) => {
+        setExpandedEpisodes(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+    }
+
     try {
         seasonInfo = seasons.map((season,key) => (
         <h5 key={key}>
-            <span style={{borderBottom:"1px solid gray"}}>
+            <span style={{display:"block",borderBottom:"1px solid gray",cursor:"pointer",marginBottom:"5px"}} onClick={() => toggleEpisode(`season-${season.season_number}`)}>
                 Season {season.season_number}
                 &nbsp;({Array.isArray(season.episodes) ? season.episodes.length : 0} episodes)
+                <br />
             </span>
             <div>
-                {season.episodes.map((episode,key) => 
-                    <div className="episodes" key={key} title={episode.air_date + ": " + episode.overview} style={{cursor:"default", marginLeft: '2ch'}}>{episode.name}</div>
-                )}
+                {season.episodes.map((episode,ekey) => {
+                    const eid = episode.id || `${season.season_number}-${episode.episode_number}`;
+                    const isExpanded = expandedEpisodes.includes(eid);
+                    return (
+                        <div key={ekey} style={{marginLeft: '2ch', marginBottom: '0.4em'}}>
+                            <div className="episodes" style={{cursor: 'pointer'}} onClick={() => toggleEpisode(eid)}>
+                                {episode.episode_number !== undefined ? <strong>{episode.episode_number}. </strong> : ''}{episode.name}
+                                {episode.air_date ? <span style={{marginLeft:'0.5ch', fontSize:'0.9em', color:'#ddd'}}>({episode.air_date})</span> : null}
+                            </div>
+                            {isExpanded && episode.overview ? (
+                                <div className="episode-overview" style={{marginLeft:'1ch', marginTop:'0.25em', color:'#e6eef8'}}>{episode.overview}</div>
+                            ) : null}
+                        </div>
+                    )
+                })}
             </div>
         </h5>))
     } catch (e) {
@@ -90,7 +108,7 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                         </td>
                     </tr>
                 </table>
-                <table className="table table-responsive">
+                <table className="table">
                     <tr>
                         <td className="detailItems" style={{textAlign:"left"}}>
                             <h4 className="blueHeader">Episodes By Season</h4>

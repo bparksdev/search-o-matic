@@ -59,10 +59,13 @@ const SearchMovies = () => {
         <>
             <form className="form" onSubmit={searchMovies}>
                 <label className="label" htmlFor="query">Movie Title</label>
-                <input className="input" type="text" name="query" required="true"
-                    placeholder="i.e. Jurassic Park"
-                    value={query} onChange={(e) => setQuery(e.target.value)}
-                    />
+                <div className="input-wrapper">
+                    <input className="input" type="text" name="query" required="true"
+                        placeholder="i.e. Jurassic Park"
+                        value={query} onChange={(e) => setQuery(e.target.value)}
+                        />
+                    {query.length > 0 && <button type="button" className="clear-button" aria-label="Clear" onClick={() => setQuery('')}><i className="ri-close-line" /></button>}
+                </div>
                 <button className="button" type="submit">Search</button>
             </form>
 

@@ -24,10 +24,13 @@ const SearchPeople = () => {
         <>
             <form className="form" onSubmit={searchTV}>
                 <label className="label" htmlFor="querytv">Cast Member/Crew Member</label>
-                <input className="input" type="text" name="querytv"  required
-                    placeholder="i.e. Steven Spielberg"
-                    value={queryPerson} onChange={(e) => setQueryPerson(e.target.value)}
-                />
+                <div className="input-wrapper">
+                    <input className="input" type="text" name="querytv"  required
+                        placeholder="i.e. Steven Spielberg"
+                        value={queryPerson} onChange={(e) => setQueryPerson(e.target.value)}
+                    />
+                    {queryPerson.length > 0 && <button type="button" className="clear-button" aria-label="Clear" onClick={() => setQueryPerson('')}><i className="ri-close-line" /></button>}
+                </div>
                 <button className="button" type="submit">Search</button>
             </form>
             <hr />

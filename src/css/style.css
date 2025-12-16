@@ -393,8 +393,18 @@ nav a:hover,
 }
 
 .other-cast {
+  color: black;
   max-height: 76px;
   overflow-y: auto;
+}
+
+/* style links in Other Cast to be blue */
+.other-cast a {
+  color: #1e90ff;
+  text-decoration: none;
+}
+.other-cast a:hover {
+  text-decoration: underline;
 }
 
 .episodes:hover {
@@ -420,6 +430,70 @@ nav a:hover,
   list-style: none;
   margin-left: 2ch;
   padding-left: 0;
+}
+
+/* My List compact card layout */
+.mylist-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+}
+.mylist-poster {
+  width: 90px;
+  height: 130px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  flex-shrink: 0;
+}
+.mylist-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex: 1 1 auto;
+}
+.mylist-meta {
+  flex: 1 1 auto;
+}
+.mylist-actions {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+.button--small {
+  padding: 0.6rem 1rem;
+  font-size: 1.2rem;
+}
+
+/* small clear (X) button inside search inputs */
+.input-wrapper { position: relative; }
+
+/* Clear button styled as a small circle flush with the input */
+.input-wrapper .input { padding-right: 4.4rem; }
+.clear-button {
+  position: absolute;
+  right: 6px; /* tight against the input */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  color: var(--text-primary);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  z-index: 2;
+}
+.clear-button:hover {
+  background: rgba(255,255,255,0.12);
 }
 ::-webkit-scrollbar {
   width: 8px;
