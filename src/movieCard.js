@@ -51,7 +51,7 @@ export default function MovieCard({movie}) {
     }    
     const posterPath = details.poster_path || movie.poster_path
     const leftStyle = {
-        width: '135px',
+        width: '40%',
         height: '201px',
         float: 'left',
         marginRight: '16px',
