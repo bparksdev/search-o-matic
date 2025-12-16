@@ -54,12 +54,17 @@ export default function MovieCard({movie}) {
         width: '40%',
         height: '201px',
         float: 'left',
-        marginRight: '16px',
+        // marginRight: '16px',
         backgroundImage: posterPath ? `url("https://image.tmdb.org/t/p/w342${posterPath}")` : 'none',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
         borderRadius: '4px'
+    }
+
+    const rightStyle = {  
+        width: posterPath ? '60%' : '0',
+        padding: '10px'
     }
     // eslint-disable-next-line  
     useEffect(() => {
@@ -90,7 +95,7 @@ export default function MovieCard({movie}) {
                                 </span>
                             </h3>
                             <div style={leftStyle} aria-hidden={!posterPath} />
-                            <div className="row">
+                            <div className="row" style={rightStyle}>
                                 <div className="col-sm-2">
                                     <small>RELEASE DATE:<div>&nbsp;{movie.release_date ? movie.release_date : "In Production"}</div></small>
                                 </div>
