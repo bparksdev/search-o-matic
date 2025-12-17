@@ -64,7 +64,7 @@ export default function MovieCard({movie}) {
 
     const rightStyle = {  
         width: posterPath ? '60%' : '0',
-        padding: '10px'
+        paddingLeft: '10px'
     }
     // eslint-disable-next-line  
     useEffect(() => {
@@ -88,9 +88,6 @@ export default function MovieCard({movie}) {
                         <div className="card--content" key={movie.id} style={{overflow: 'hidden'}}>
                             <h3 className="card--title">
                                 {movie.title} {dispDate !== null ? `(${dispDate.getFullYear()})` : null}
-                                <span style={{float:"right"}}>
-                                    <SaveButton movie={movie} />
-                                </span>
                             </h3>
                             <div style={{display:'flex'}}>
                                 <div style={{width:'40%', float:'left', display:'flex', flexDirection:'column', alignItems:'center'}}>
@@ -100,18 +97,22 @@ export default function MovieCard({movie}) {
                                             <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" style={{width:60}} />
                                         </a>
                                     ) : null}
+                                    <div style={{marginTop:8, display:'flex', justifyContent:'center'}}>
+                                        <SaveButton movie={movie} />
+                                    </div>
                                 </div>
-                            <div className="row" style={rightStyle}>
-                                <div className="col-sm-2">
+                            
+                            <div className="" style={rightStyle}>
+                                <div className="">
                                     <small>RELEASE DATE:<div>&nbsp;{movie.release_date ? movie.release_date : "In Production"}</div></small>
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                         GENRE(S):&nbsp;
                                         {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
                                     </small>
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                     DIRECTOR:<div>{crew.filter(person => person.job === 'Director').map(person => (
                                        <li key={person.id}>&nbsp;<a href={`/people/${person.name}`}>{person.name}</a></li>
@@ -119,7 +120,7 @@ export default function MovieCard({movie}) {
                                     </div>
                                     </small>
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                     SCREENPLAY:<div>
                                     {crew.filter(person => person.job === 'Screenplay').map(person => (
@@ -128,12 +129,12 @@ export default function MovieCard({movie}) {
                                     </div>
                                     </small>
                                 </div>                                 
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                     RUNTIME:<div>&nbsp;{details.runtime ? `${details.runtime} mins` : "TBD"}</div>
                                     </small>
                                 </div>                                
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                         RATING:<div>&nbsp;{movie.vote_average ? `${movie.vote_average} out of 10` : "TBD"}</div>
                                     </small>

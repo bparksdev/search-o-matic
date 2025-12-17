@@ -33,5 +33,5 @@ export default function SaveButton({show, movie}){
         }
     }
 
-    return <button type="button" className="button" onClick={toggle} style={{marginLeft:8}}>{saved ? 'Saved' : 'Save'}</button>
+    return <button type="button" className="button" onClick={toggle} style={{padding: '10px'}}>{saved ? 'Saved' : 'Save'}</button>
 }
