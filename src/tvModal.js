@@ -5,19 +5,40 @@ import { Button } from 'react-bootstrap';
 
 const TvModal = ({details, similars, seasons, recommendations}) => {
     const [show, setShow] = useState(false);
+    const [expandedEpisodes, setExpandedEpisodes] = useState([]);
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
     var seasonInfo = null
 
+    const toggleEpisode = (id) => {
+        setExpandedEpisodes(prev => prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id]);
+    }
+
     try {
         seasonInfo = seasons.map((season,key) => (
         <h5 key={key}>
-            <span style={{borderBottom:"1px solid gray"}}>Season {season.season_number}</span>
-            <ol>
-                {season.episodes.map((episode,key) => 
-                    <li className="episodes" key={key} title={episode.air_date + ": " + episode.overview} style={{cursor:"default"}}>{episode.name}</li>
-                )}
-            </ol>
+            <span style={{display:"block",borderBottom:"1px solid gray",cursor:"pointer",marginBottom:"5px"}} onClick={() => toggleEpisode(`season-${season.season_number}`)}>
+                Season {season.season_number}
+                &nbsp;({Array.isArray(season.episodes) ? season.episodes.length : 0} episodes)
+                <br />
+            </span>
+            <div>
+                {season.episodes.map((episode,ekey) => {
+                    const eid = episode.id || `${season.season_number}-${episode.episode_number}`;
+                    const isExpanded = expandedEpisodes.includes(eid);
+                    return (
+                        <div key={ekey} style={{marginLeft: '2ch', marginBottom: '0.4em'}}>
+                            <div className="episodes" style={{cursor: 'pointer'}} onClick={() => toggleEpisode(eid)}>
+                                {episode.episode_number !== undefined ? <strong>{episode.episode_number}. </strong> : ''}{episode.name}
+                                {episode.air_date ? <span style={{marginLeft:'0.5ch', fontSize:'0.9em', color:'#ddd'}}>({episode.air_date})</span> : null}
+                            </div>
+                            {isExpanded && episode.overview ? (
+                                <div className="episode-overview" style={{marginLeft:'1ch', marginTop:'0.25em', color:'#e6eef8'}}>{episode.overview}</div>
+                            ) : null}
+                        </div>
+                    )
+                })}
+            </div>
         </h5>))
     } catch (e) {
         seasonInfo = "Not available"
@@ -38,7 +59,7 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                 <Modal.Title><h2>{details.name} - More Info</h2></Modal.Title>
             </Modal.Header>
             <Modal.Body style={{backgroundColor:"#09243e"}}>
-                <table className="table table-responsive">
+                <table className="table">
                     <tr>
                         <td className="detailItems" style={{width:"100%"}}>
                             <strong>AIR DATES:</strong> {details.first_air_date} to {details.last_air_date}
@@ -47,7 +68,11 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                     <tr>
                         <td className="detailItems">
                                 <strong>GENRE(S):</strong>
-                                {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
+                                {Array.isArray(details.genres) ? (
+                                    <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
+                                        {details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>))}
+                                    </ul>
+                                ) : ""}
                         </td>
                     </tr>
                     <tr>
@@ -58,7 +83,11 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                     <tr>
                         <td className="detailItems">
                                 <strong>ORIGINAL NETWORK(S):</strong>
-                            {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
+                            {Array.isArray(details.networks) ? (
+                                <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
+                                    {details.networks.map(network => (<li key={network.id}>{network.name}</li>))}
+                                </ul>
+                            ) : ""}
                         </td>
                     </tr>
                     <tr>
@@ -69,13 +98,17 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                                 <span> {details.number_of_episodes}</span><br />
                                 <strong>Created By</strong>
                                 {details.created_by !== undefined 
-                                    ? details.created_by.map(creator => (<li style={{textAlign:"left"}} key={creator.id}>{creator.name}</li>)) 
+                                    ? (
+                                        <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
+                                            {details.created_by.map(creator => (<li style={{textAlign:"left"}} key={creator.id}>{creator.name}</li>))}
+                                        </ul>
+                                      )
                                     : ""
                                 }
                         </td>
                     </tr>
                 </table>
-                <table className="table table-responsive">
+                <table className="table">
                     <tr>
                         <td className="detailItems" style={{textAlign:"left"}}>
                             <h4 className="blueHeader">Episodes By Season</h4>
@@ -108,7 +141,7 @@ const TvModal = ({details, similars, seasons, recommendations}) => {
                     <tr>
                         <td className="detailItems">
                             <h4 className="blueHeader">If you liked "{details.name}", you might like...</h4>
-                            <ul>
+                            <ul style={{listStyle: 'none', marginLeft: '2ch', paddingLeft: 0}}>
                             {recommendations.results !== undefined
                                 ? recommendations.results.map(show => (
                                     <li key={show.id}> 

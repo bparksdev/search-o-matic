@@ -4,6 +4,7 @@ import MovieModal from "./movieModal"
 import imdbLogo from "./assets/images/imdb.png"
 import ActorInfo from "./components/actorInfo"
 import WatchInfo from "./components/watchInfo"
+import SaveButton from './utils/saveButton'
 
 export default function MovieCard({movie}) {
     const [details, setDetails] = useState([])
@@ -43,12 +44,28 @@ export default function MovieCard({movie}) {
         setRecommendations(data)
     } 
 
-    const style = {  
-        backgroundImage: `url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${details.backdrop_path}")`,
-        backgroundPosition: 'center',
+    // const style = {  
+    //     //backgroundImage: `url("https://image.tmdb.org/t/p/w1920_and_h800_multi_faces/${details.backdrop_path}")`,
+    //     backgroundPosition: 'center',
+    //     backgroundSize: 'cover',
+    //     backgroundRepeat: 'no-repeat'
+    // }    
+    const posterPath = details.poster_path || movie.poster_path
+    const leftStyle = {
+        width: '100%',
+        height: '201px',
+        // marginRight: '16px',
+        backgroundImage: posterPath ? `url("https://image.tmdb.org/t/p/w342${posterPath}")` : 'none',
         backgroundSize: 'cover',
-        backgroundRepeat: 'no-repeat'
-    }    
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        borderRadius: '4px'
+    }
+
+    const rightStyle = {  
+        width: posterPath ? '60%' : '0',
+        paddingLeft: '10px'
+    }
     // eslint-disable-next-line  
     useEffect(() => {
         getDetails()
@@ -60,42 +77,42 @@ export default function MovieCard({movie}) {
 
 
     return (
-        <div className="card" style={style}>
+        <div className="card">
             <table>
                 <tbody>
                 <tr>
                     <td width="20%" valign="top" className="poster">
-                        {details.status === 'Released' && movie.poster_path
-                            ?
-                                <img className="card--image"
-                                    src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${movie.poster_path}`}
-                                    alt={movie.title + ' poster'}
-                                />
-                            : null
-                        }
                         {details.status !== 'Released' ? <small className="upComing">Not Yet Released</small> : null}
                     </td>
                     <td>
-                        <div className="card--content" key={movie.id}>
+                        <div className="card--content" key={movie.id} style={{overflow: 'hidden'}}>
                             <h3 className="card--title">
                                 {movie.title} {dispDate !== null ? `(${dispDate.getFullYear()})` : null}
-                                <span style={{float:"right"}}>
-                                    <a href={`https://imdb.com/title/${details.imdb_id}`} rel="noopener noreferrer" target="_blank">
-                                        <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" />
-                                    </a>
-                                </span>
                             </h3>
-                            <div className="row">
-                                <div className="col-sm-2">
+                            <div style={{display:'flex'}}>
+                                <div style={{width:'40%', float:'left', display:'flex', flexDirection:'column', alignItems:'center'}}>
+                                    <div style={leftStyle} aria-hidden={!posterPath} />
+                                    {details.imdb_id ? (
+                                        <a href={`https://imdb.com/title/${details.imdb_id}`} rel="noopener noreferrer" target="_blank" style={{marginTop:8}}>
+                                            <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" style={{width:60}} />
+                                        </a>
+                                    ) : null}
+                                    <div style={{marginTop:8, display:'flex', justifyContent:'center'}}>
+                                        <SaveButton movie={movie} />
+                                    </div>
+                                </div>
+                            
+                            <div className="" style={rightStyle}>
+                                <div className="">
                                     <small>RELEASE DATE:<div>&nbsp;{movie.release_date ? movie.release_date : "In Production"}</div></small>
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
-                                        GENRE(S):<div>&nbsp;
-                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}</div>
+                                        GENRE(S):&nbsp;
+                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
                                     </small>
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                     DIRECTOR:<div>{crew.filter(person => person.job === 'Director').map(person => (
                                        <li key={person.id}>&nbsp;<a href={`/people/${person.name}`}>{person.name}</a></li>
@@ -103,7 +120,7 @@ export default function MovieCard({movie}) {
                                     </div>
                                     </small>
                                 </div>
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                     SCREENPLAY:<div>
                                     {crew.filter(person => person.job === 'Screenplay').map(person => (
@@ -111,19 +128,20 @@ export default function MovieCard({movie}) {
                                     ))}
                                     </div>
                                     </small>
-                                </div>                                
-                                <div className="col-sm-2">
+                                </div>                                 
+                                <div className="">
                                     <small>
                                     RUNTIME:<div>&nbsp;{details.runtime ? `${details.runtime} mins` : "TBD"}</div>
                                     </small>
                                 </div>                                
-                                <div className="col-sm-2">
+                                <div className="">
                                     <small>
                                         RATING:<div>&nbsp;{movie.vote_average ? `${movie.vote_average} out of 10` : "TBD"}</div>
                                     </small>
                                 </div>
+                                </div>
                             </div>
-                            
+
                             <p className="card--desc" style={{marginTop:"20px"}}>{movie.overview}</p>
 
                             <WatchInfo movie={movie} source="movie" />
