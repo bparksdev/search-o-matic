@@ -169,6 +169,7 @@ export default function TvCard( { show } ) {
                                 </span>
                             </h3>
                             <table className="table text-center">
+                                <tbody>
                                 <tr>
                                     <td width="25%">
                                         <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank">
@@ -202,6 +203,7 @@ export default function TvCard( { show } ) {
                                         :   null
                                     }
                             </tr>
+                            </tbody>
                         </table>
 
                             <p className="card--desc" style={{marginTop:"20px"}}>{show.overview}</p>
