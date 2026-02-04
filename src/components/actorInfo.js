@@ -8,6 +8,9 @@ export default function ActorInfo({cast}) {
     const [bioClassName, setBioClassName] = useState("bioClosed")
     const [credits, setCredits] = useState([])
     const [bio, setBio] = useState([])
+    const [showCast, setShowCast] = useState(false)
+
+    const TMDB_KEY = process.env.REACT_APP_TMDB_KEY || "";
     
     const imageRoot = 'https://image.tmdb.org/t/p/original'
 
@@ -17,12 +20,12 @@ export default function ActorInfo({cast}) {
         setBio("")
         setCredits([])   
         setBioClassName("bio")
-        const url = `https://api.themoviedb.org/3/person/${actorid}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/person/${actorid}?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setBio(data)
 
-        const url2 = `https://api.themoviedb.org/3/person/${actorid}/combined_credits?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url2 = `https://api.themoviedb.org/3/person/${actorid}/combined_credits?api_key=${TMDB_KEY}&language=en-US`
         const res2 = await fetch(url2);
         const data2  = await res2.json(); 
         setCredits(data2.cast)        
@@ -54,7 +57,13 @@ export default function ActorInfo({cast}) {
 
     return (
         <>
-        <h3 style={{padding:"5px",marginTop:"15px",backgroundColor:"#6d8eaa"}}>Featured Cast</h3>
+        <h3 
+            style={{padding:"5px",marginTop:"15px",backgroundColor:"#6d8eaa",cursor:"pointer",userSelect:"none"}}
+            onClick={() => setShowCast(!showCast)}
+        >
+            Featured Cast {showCast ? '▼' : '►'}
+        </h3>
+        {showCast && (
         <div className="actors">
         <table className="table">
             <tbody>
@@ -176,6 +185,7 @@ export default function ActorInfo({cast}) {
             </tbody>                             
         </table>                            
     </div>
+    )}
     </>        
     )
 }

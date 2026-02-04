@@ -13,6 +13,8 @@ export default function TvCard( { show } ) {
     const [externalIds, setExternalIDs] = useState([])
     const [seasons, setSeasons] = useState([])
     const allSeasons = []
+
+    const TMDB_KEY = process.env.REACT_APP_TMDB_KEY || "";
  
     useEffect(() => {
         getDetails()    
@@ -42,14 +44,14 @@ export default function TvCard( { show } ) {
     
     var dispDate = new Date(show.first_air_date)
     const getDetails = async () => {
-        const url = `https://api.themoviedb.org/3/tv/${show.id}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`;
+        const url = `https://api.themoviedb.org/3/tv/${show.id}?api_key=${TMDB_KEY}&language=en-US`;
         const res = await fetch(url);
         const data  = await res.json(); 
         setDetails(data)
 
 
         for(var x=1; x<=details.number_of_seasons; x++) {
-            const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+            const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=${TMDB_KEY}&language=en-US`
             const res = fetch(url);
             const data  = res.json();
             allSeasons.push(data)
@@ -59,28 +61,28 @@ export default function TvCard( { show } ) {
 
     const getCast = async () => {
         //console.log(show.id);
-        const url = `https://api.themoviedb.org/3/tv/${show.id}/credits?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/tv/${show.id}/credits?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setCast(data.cast)
     }
 
     const getSimilars = async () => {
-        const url = `https://api.themoviedb.org/3/tv/${show.id}/similar?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/tv/${show.id}/similar?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setSimilars(data)
     }    
 
     const getRecommendations = async () => {
-        const url = `https://api.themoviedb.org/3/tv/${show.id}/recommendations?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/tv/${show.id}/recommendations?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setRecommendations(data)
     }     
 
     const getExternalIDs = async () => {
-        const url = `https://api.themoviedb.org/3/tv/${show.id}/external_ids?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/tv/${show.id}/external_ids?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setExternalIDs(data)
@@ -89,7 +91,7 @@ export default function TvCard( { show } ) {
 
     const getSeasons = async () => {
         for(var x=1; x<=details.number_of_seasons; x++) {
-            const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+            const url = `https://api.themoviedb.org/3/tv/${show.id}/season/${x}?api_key=${TMDB_KEY}&language=en-US`
             const res = await fetch(url);
             const data  = await res.json();
             allSeasons.push(data)

@@ -32,9 +32,9 @@ export default function WatchInfo({ movie }) {
     // Determine the media type for the endpoint:
     // - prefer movie.media_type when present (e.g., "movie" or "tv")
     // - otherwise default to "movie"
-    const mediaType = movie.media_type || "movie";
+    //const mediaType = movie.media_type || "movie";
 
-    const url = `https://api.themoviedb.org/3/${mediaType}/${movie.id}/watch/providers?api_key=${TMDB_KEY}&language=en-US`;
+    const url = `https://api.themoviedb.org/3/${arguments[0].source}/${movie.id}/watch/providers?api_key=${TMDB_KEY}&language=en-US`;
 
     let didCancel = false;
     async function fetchProviders() {
@@ -116,35 +116,18 @@ export default function WatchInfo({ movie }) {
 
   return (
     <div className="row">
-        <div className="col-sm-12" style={{border:"1px solid #85a5de",marginTop:"10px",borderRadius:"5px"}}>
-            <h3>Where Can I Watch It?</h3>
-            <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white"}}>Buy/Rent</h5>
-            {providers.results && providers.results.US && Array.isArray(providers.results.US.buy) 
-                ? providers.results.US.buy.map(
-                    buyoption => (
-                        <div key={buyoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px",marginBottom:"4px"}}>
-                            <img alt=""  src={`https://image.tmdb.org/t/p/w200/${buyoption.logo_path}`} title={buyoption.provider_name} style={{width:"100%",height:"100%",marginBottom:"3px"}} />
-                            
-                        </div>
-                    )
-                ) 
-                : "N/A"
-            }
-            <h5 style={{backgroundColor:"rgb(109, 142, 170)",padding:"5px",color:"white",marginTop:"20px"}}>Streaming</h5>
-            {providers.results && providers.results.US && Array.isArray(providers.results.US.flatrate) 
-                ? providers.results.US.flatrate.map(
-                    rentoption => (
-                        <div key={rentoption.provider_id} style={{display:"inline-block",width:"80px",height:"80px",marginRight:"10px",marginBottom:"4px"}}>
-                            <img alt=""  src={`https://image.tmdb.org/t/p/w200/${rentoption.logo_path}`} title={rentoption.provider_name} style={{width:"100%",height:"100%"}} />
-                        </div>
-                    )
-                ) 
-                : "N/A"
-            }                                    
-           
-        </div>    
-    </div>        
-    )
+      <div
+        className="col-sm-12"
+        style={{ padding: "10px 10px 24px 10px", border: "1px solid #85a5de", marginTop: "10px", borderRadius: "5px" }}
+      >
+
+        <h5 style={{ backgroundColor: "rgb(109, 142, 170)", padding: "10px", color: "white" }}>Buy/Rent</h5>
+        {providers === null && !error ? <div>Loading...</div> : renderProviderSection("Buy/Rent", buy)}
+
+        <h5 style={{ backgroundColor: "rgb(109, 142, 170)", padding: "10px", color: "white", marginTop: "20px" }}>
+          Streaming
+        </h5>
+        {providers === null && !error ? <div>Loading...</div> : renderProviderSection("Streaming", stream)}
 
         {error ? <div style={{ color: "red", marginTop: 8 }}>{error}</div> : null}
       </div>

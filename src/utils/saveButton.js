@@ -10,9 +10,13 @@ const writeList = (list) => {
     try { localStorage.setItem(STORAGE_KEY, JSON.stringify(list)) } catch(e){}
 }
 
-export default function SaveButton({show, movie}){
+export default function SaveButton({show, movie, person}){
     const [saved, setSaved] = useState(false)
-    const item = movie ? {type:'movie', id: movie.id, title: movie.title, poster_path: movie.poster_path} : {type:'tv', id: show.id, title: show.name, poster_path: show.poster_path}
+    const item = movie 
+        ? {type:'movie', id: movie.id, title: movie.title, poster_path: movie.poster_path, release_date: movie.release_date} 
+        : person
+        ? {type:'person', id: person.id, name: person.name, profile_path: person.profile_path, known_for_department: person.known_for_department}
+        : {type:'tv', id: show.id, title: show.name, poster_path: show.poster_path, first_air_date: show.first_air_date}
 
     useEffect(()=>{
         const list = readList()

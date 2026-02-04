@@ -5,11 +5,13 @@ const SearchPeople = () => {
 
     const [queryPerson, setQueryPerson] = useState('');
     const [people, setPeople] = useState([]);
+
+    const TMDB_KEY = process.env.REACT_APP_TMDB_KEY || "";
     
     const searchTV = async (e) => {
         e.preventDefault();
     
-        const url = `https://api.themoviedb.org/3/search/person?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US&query=${queryPerson}&page=1&include_adult=false`;
+        const url = `https://api.themoviedb.org/3/search/person?api_key=${TMDB_KEY}&language=en-US&query=${queryPerson}&page=1&include_adult=false`;
         
         try {
             const res = await fetch(url)

@@ -4,6 +4,8 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
 
 import './css/style.css';
 import NavBar from "./NavBar"
+import Footer from "./Footer"
+import BackToTop from "./BackToTop"
 import MovieDisplay from "./movieDisplay";
 import TvDisplay from "./tvDisplay";
 import PeopleDisplay from "./peopleDisplay";
@@ -41,6 +43,8 @@ class Main extends React.Component {
                     <Route path="/my-list" component={MyList} />
                 </Switch>           
             </div>
+            <Footer />
+            <BackToTop />
         </div>
         </Router>
     );

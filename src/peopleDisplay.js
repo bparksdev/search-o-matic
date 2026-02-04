@@ -5,7 +5,8 @@ import PeopleCard from './peopleCard.js'
 function PeopleDisplay() {
     const {query} = useParams()
     const [people, setPeople] = useState([]);
-    const url = `https://api.themoviedb.org/3/search/person?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US&query=${query}&page=1&include_adult=false`;
+    const TMDB_KEY = process.env.REACT_APP_TMDB_KEY || "";
+    const url = `https://api.themoviedb.org/3/search/person?api_key=${TMDB_KEY}&language=en-US&query=${query}&page=1&include_adult=false`;
 
     useEffect(() => {
         try {

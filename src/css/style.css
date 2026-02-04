@@ -52,15 +52,43 @@ body {
 
 /* Typography */
 .title {
-  font-size: clamp(3rem, 6vw, 5rem);
-  font-weight: 700;
+  font-size: clamp(3.5rem, 7vw, 6rem);
+  font-weight: 800;
   text-align: center;
   color: var(--text-primary);
-  margin-bottom: 3rem;
-  background: linear-gradient(45deg, var(--text-primary), var(--highlight-color));
+  margin-bottom: 2rem;
+  padding: 1.5rem 0;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  letter-spacing: -0.5px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  animation: fadeInDown 0.8s ease-out;
+}
+
+.title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 p {
@@ -435,36 +463,100 @@ nav a:hover,
 /* My List compact card layout */
 .mylist-item {
   display: flex;
-  gap: 1rem;
-  align-items: center;
-  padding: 1rem;
+  gap: 2rem;
+  align-items: flex-start;
+  padding: 1.5rem;
+  background: var(--card-background);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-light);
+  transition: var(--transition);
 }
+
+.mylist-item:hover {
+  box-shadow: var(--shadow-medium);
+  transform: translateY(-2px);
+}
+
 .mylist-poster {
-  width: 90px;
-  height: 130px;
+  width: 120px;
+  height: 180px;
   background-size: cover;
   background-position: center;
   border-radius: 8px;
   flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  background-color: #333;
 }
+
 .mylist-info {
   display: flex;
-  align-items: center;
+  flex-direction: column;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 1.5rem;
   flex: 1 1 auto;
+  min-height: 180px;
 }
+
 .mylist-meta {
   flex: 1 1 auto;
 }
+
+.mylist-meta h3 {
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  font-size: 2rem;
+  font-weight: 600;
+}
+
+.mylist-meta small {
+  color: #666;
+  font-size: 1.2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 .mylist-actions {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
   align-items: center;
 }
 .button--small {
   padding: 0.6rem 1rem;
   font-size: 1.2rem;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 1rem;
+  border-bottom: 2px solid #333;
+  flex-wrap: wrap;
+}
+
+.tab-button {
+  background: transparent;
+  border: none;
+  color: #b8b8b8;
+  font-size: 1.4rem;
+  font-weight: 500;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: all 0.3s ease;
+  position: relative;
+  bottom: -2px;
+}
+
+.tab-button:hover {
+  color: #ffffff;
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.tab-button.active {
+  color: #ffffff;
+  border-bottom: 3px solid #667eea;
+  background: rgba(102, 126, 234, 0.1);
 }
 
 /* small clear (X) button inside search inputs */
@@ -495,6 +587,50 @@ nav a:hover,
 .clear-button:hover {
   background: rgba(255,255,255,0.12);
 }
+
+/* Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.4rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  z-index: 1000;
+  transition: all 0.3s ease;
+  animation: fadeInUp 0.3s ease;
+}
+
+.back-to-top:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+}
+
+.back-to-top:active {
+  transform: translateY(-1px);
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -629,6 +765,11 @@ nav a:hover,
   }
   
   .title {
-    font-size: 2.5rem;
+    font-size: 3rem;
+  }
+
+  .title::after {
+    width: 60px;
+    height: 3px;
   }
 }

@@ -13,17 +13,19 @@ export default function MovieCard({movie}) {
     const [similars, setSimilars] = useState([])
     const [recommendations, setRecommendations] = useState([])
 
+    const TMDB_KEY = process.env.REACT_APP_TMDB_KEY || "";
+
     const dispDate = movie.release_date !== "" ? new Date(movie.release_date) : null
 
     const getDetails = async () => {
-        const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`;
+        const url = `https://api.themoviedb.org/3/movie/${movie.id}?api_key=${TMDB_KEY}&language=en-US`;
         const res = await fetch(url);
         const data  = await res.json(); 
         setDetails(data)    
     }
 
     const getCast = async () => {
-        const url = `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/movie/${movie.id}/credits?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setCast(data.cast)
@@ -31,14 +33,14 @@ export default function MovieCard({movie}) {
     }
 
     const getSimilars = async () => {
-        const url = `https://api.themoviedb.org/3/movie/${movie.id}/similar?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/movie/${movie.id}/similar?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setSimilars(data)
     }    
 
     const getRecommendations = async () => {
-        const url = `https://api.themoviedb.org/3/movie/${movie.id}/recommendations?api_key=017579ded6888c915f4b861b1f93aec6&language=en-US`
+        const url = `https://api.themoviedb.org/3/movie/${movie.id}/recommendations?api_key=${TMDB_KEY}&language=en-US`
         const res = await fetch(url);
         const data  = await res.json(); 
         setRecommendations(data)
