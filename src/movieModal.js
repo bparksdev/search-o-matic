@@ -29,10 +29,10 @@ const MovieModal = ({details, similars, recommendations}) => {
             aria-labelledby="contained-modal-title-vcenter"
             centered
             show={show} onHide={handleClose}>
-            <Modal.Header  closeButton>
-                <Modal.Title><h2>{details.title} - More Info</h2></Modal.Title>
+            <Modal.Header closeButton style={{backgroundColor:"#09243e", color:"white", padding:"1rem 1.5rem", borderBottom:"1px solid rgba(255,255,255,0.2)"}}>
+                <Modal.Title style={{margin:0}}><h2 style={{margin:0, fontSize:"2rem"}}>{details.title} - More Info</h2></Modal.Title>
             </Modal.Header>
-            <Modal.Body style={{backgroundColor:"#09243e"}}>
+            <Modal.Body style={{backgroundColor:"#09243e", padding:"1.5rem"}}>
                 <table className="table table-responsive">
                     <tr>
                         <td className="detailItems">
@@ -88,7 +88,7 @@ const MovieModal = ({details, similars, recommendations}) => {
 
 
             </Modal.Body>
-            <Modal.Footer>
+            <Modal.Footer style={{backgroundColor:"#09243e", borderTop:"1px solid rgba(255,255,255,0.2)", padding:"1rem 1.5rem"}}>
                 <Button variant="secondary btn-lg" onClick={handleClose}>
                     Close
                 </Button>

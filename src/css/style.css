@@ -234,6 +234,14 @@ small {
   transform: scale(1.05);
 }
 
+.headshot {
+  width: 100%;
+  max-width: 150px;
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-medium);
+  transition: var(--transition);
+}
+
 .card--content {
   background: transparent;
   padding: 0;
@@ -659,6 +667,34 @@ nav a:hover,
 
 .modal-body div {
   margin-bottom: 1rem;
+}
+
+.modal-header .btn-close {
+  background-color: white;
+  border-radius: 50%;
+  opacity: 0.9;
+  padding: 0.5rem;
+  width: 1.5em;
+  height: 1.5em;
+}
+
+.modal-header .btn-close:hover {
+  opacity: 1;
+  background-color: #f8f9fa;
+  transform: scale(1.1);
+}
+
+.modal-header .close {
+  color: white;
+  opacity: 0.9;
+  font-size: 2rem;
+  font-weight: 300;
+  text-shadow: none;
+}
+
+.modal-header .close:hover {
+  color: white;
+  opacity: 1;
 }
 
 /* Powered by styling */

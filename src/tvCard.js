@@ -107,7 +107,23 @@ export default function TvCard( { show } ) {
         backgroundPosition: 'right top',
         backgroundSize: 'cover',
         backgroundRepeat: 'no-repeat'
-    }    
+    }
+    
+    const posterPath = details.poster_path || show.poster_path
+    const leftStyle = {
+        width: '100%',
+        height: '201px',
+        backgroundImage: posterPath ? `url("https://image.tmdb.org/t/p/w342${posterPath}")` : 'none',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        borderRadius: '4px'
+    }
+
+    const rightStyle = {  
+        width: posterPath ? '60%' : '40%',
+        paddingLeft: '10px'
+    }
 
     return (
          <div className="card">
@@ -115,59 +131,60 @@ export default function TvCard( { show } ) {
                 <tbody>
                 <tr>
                     <td width="20%" valign="top" className="poster">
-                        {show.poster_path
-                            ?
-                                <img className="card--image"
-                                    src={`https://image.tmdb.org/t/p/w185_and_h278_bestv2/${show.poster_path}`}
-                                    alt={show.name + ' poster'}
-                                />
-                            : null
-                        }
-                        {externalIds && externalIds.imdb_id ? (
-                            <div style={{marginTop:8}}>
-                                <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank">
-                                    <img src={imdbLogo} className="imdb-logo" style={{width:60}} alt="IMDb" title="Go to IMDb" />
-                                </a>
-                            </div>
-                        ) : null}
-                        <div className="alert alert-info mt-4" style={{opacity: "0.8", width:"90%"}}>
-                                <div>
-                                    <small><strong>AIR DATES:</strong> {show.first_air_date} to {details.last_air_date}</small>
-                                </div>
-                                <hr />
-                                <div>
-                                    <small><strong>SEASONS:</strong> {details.number_of_seasons}<br />({details.number_of_episodes} episodes)</small>
-                                </div>
-                                <hr />                                
-                                <div>
-                                    <small>
-                                        <strong>GENRE(S):</strong>
-                                        {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
-                                    </small>
-                                </div>
-                                <hr />
-                                <div>
-                                    <small>
-                                        <strong>RATING:</strong> {show.vote_average} out of 10
-                                    </small>
-                                </div>
-                                <hr />
-                                <div>
-                                    <small>
-                                        <strong>ORIGINAL NETWORK(S):</strong>
-                                    {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
-                                    </small>
-                                </div>                                
-                            </div>                    
                     </td>
                     <td>
-                        <div className="card--content" key={show.id}>
+                        <div className="card--content" key={show.id} style={{overflow: 'hidden'}}>
                             <h3 className="card--title">
                                 {show.name} ({dispDate.getFullYear()})
                                 <span style={{float:"right"}}>
                                     <SaveButton show={show} />
                                 </span>
                             </h3>
+                            <div style={{display:'flex'}}>
+                                <div style={{width:'40%', float:'left', display:'flex', flexDirection:'column', alignItems:'center'}}>
+                                    <div style={leftStyle} aria-hidden={!posterPath} />
+                                    {externalIds && externalIds.imdb_id ? (
+                                        <a href={`https://imdb.com/title/${externalIds.imdb_id}`} rel="noopener noreferrer" target="_blank" style={{marginTop:8}}>
+                                            <img src={imdbLogo} className="imdb-logo" alt="IMDb" title="Go to IMDb" style={{width:60}} />
+                                        </a>
+                                    ) : null}
+                                    <div style={{marginTop:8, display:'flex', justifyContent:'center'}}>
+                                        <SaveButton show={show} />
+                                    </div>
+                                </div>
+                            
+                            <div className="" style={rightStyle}>
+                                <div className="alert alert-info" style={{opacity: "0.8"}}>
+                                    <div>
+                                        <small><strong>AIR DATES:</strong> {show.first_air_date} to {details.last_air_date}</small>
+                                    </div>
+                                    <hr />
+                                    <div>
+                                        <small><strong>SEASONS:</strong> {details.number_of_seasons}<br />({details.number_of_episodes} episodes)</small>
+                                    </div>
+                                    <hr />                                
+                                    <div>
+                                        <small>
+                                            <strong>GENRE(S):</strong>
+                                            {Array.isArray(details.genres) ? details.genres.map(genre => (<li key={genre.id}>{genre.name}</li>)) : ""}
+                                        </small>
+                                    </div>
+                                    <hr />
+                                    <div>
+                                        <small>
+                                            <strong>RATING:</strong> {show.vote_average} out of 10
+                                        </small>
+                                    </div>
+                                    <hr />
+                                    <div>
+                                        <small>
+                                            <strong>ORIGINAL NETWORK(S):</strong>
+                                        {Array.isArray(details.networks) ? details.networks.map(network => (<li key={network.id}>{network.name}</li>)) : ""}
+                                        </small>
+                                    </div>                                
+                                </div>
+                                </div>
+                            </div>
                             <table className="table text-center">
                                 <tbody>
                                 <tr>

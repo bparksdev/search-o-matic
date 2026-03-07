@@ -75,20 +75,23 @@ export default function WatchInfo({ movie }) {
         return (
           <div
             key={p.provider_id}
-            style={{ display: "inline-block", width: "80px", height: "80px", marginRight: "10px", marginBottom: "4px" }}
+            style={{ display: "inline-block", width: "80px", marginRight: "10px", marginBottom: "10px", textAlign: "center" }}
           >
+            <small style={{ fontSize: "10px", display: "block", marginBottom: "4px", color: "white" }}>
+              {providerName}
+            </small>
             {logo ? (
               <img
                 alt={providerName}
                 src={logo}
                 title={providerName}
-                style={{ width: "100%", height: "100%", marginBottom: "3px", objectFit: "contain" }}
+                style={{ width: "100%", height: "80px", objectFit: "contain" }}
               />
             ) : (
               <div
                 style={{
                   width: "100%",
-                  height: "100%",
+                  height: "80px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
